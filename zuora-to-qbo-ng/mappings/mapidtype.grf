@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="adrianhsieh" created="Tue Aug 27 08:19:44 PDT 2013" guiVersion="3.4.0.P" id="1377640256272" licenseCode="Unlicensed" licenseType="Unknown" modified="Tue Aug 27 08:19:44 PDT 2013" modifiedBy="adrianhsieh" name="mapidtype_grf" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/customermap" _dataStructure="OBJECT" _id="__id" _type="Input" id="50935d99-a304-4299-aa09-b60dc174dfa3">
+<Record fieldDelimiter="|" name="customermap" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/customermap/QuickBooksCustomerId__c" containerType="SINGLE" label="QuickBooksCustomerId__c" name="QuickBooksCustomerId__c" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="2771592f-8a85-4dfe-b0c6-cacd04a2c546">
+<Record fieldDelimiter="|" name="IdType" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/idDomain" containerType="SINGLE" label="idDomain" name="idDomain" type="string"/>
+<Field __index="1" __sourcePath="{}/object/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiName="Map&lt;k,v&gt; READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="QuickBooksCustomerId__c" trim="true" xpath="QuickBooksCustomerId__c"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[MAP]]></attr>
+</Node>
+<Node enabled="enabled" fileURL="dict:outputPayload" guiName="Pojo WRITER" guiX="900" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <idDomain>$0.idDomain</idDomain>
+  <value>$0.value</value>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'customermap' -&gt; 'object'" guiX="460" guiY="20" id="FOREACH_CUSTOMERMAP_OBJECT" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.value = $in.0.QuickBooksCustomerId__c;
+//START -> DO NOT REMOVE
+$out.0.__id = $in.0.__id;
+//END -> DO NOT REMOVE
+	return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="50935d99-a304-4299-aa09-b60dc174dfa3" outPort="Port 0 (out)" toNode="FOREACH_CUSTOMERMAP_OBJECT:0"/>
+<Edge debugMode="true" fromNode="FOREACH_CUSTOMERMAP_OBJECT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="2771592f-8a85-4dfe-b0c6-cacd04a2c546" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+</Phase>
+</Graph>

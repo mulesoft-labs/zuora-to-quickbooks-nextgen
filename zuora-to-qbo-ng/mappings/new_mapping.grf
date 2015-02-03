@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="adrianhsieh" created="Tue Aug 13 08:45:52 PDT 2013" guiVersion="3.4.0.P" id="1376420759566" licenseCode="Unlicensed" licenseType="Unknown" modified="Tue Aug 13 08:45:52 PDT 2013" modifiedBy="adrianhsieh" name="new_mapping_grf" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/tenant" _dataStructure="OBJECT" _id="__id" _type="Output" id="acee6059-bef0-458a-a3f0-4ed78181a7fa">
+<Record fieldDelimiter="|" name="tenant" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="2" __sourcePath="{}/tenant/enabled" containerType="SINGLE" label="enabled" name="enabled" type="boolean"/>
+<Field __index="0" __sourcePath="{}/tenant/id" containerType="SINGLE" label="id" name="id" type="string"/>
+<Field __index="1" __sourcePath="{}/tenant/name" containerType="SINGLE" label="name" name="name" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="bf006961-8fe7-4fb4-bad0-1b44418a0a31">
+<Record fieldDelimiter="|" name="UserInformation" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/emailAddress" containerType="SINGLE" label="emailAddress" name="emailAddress" type="string"/>
+<Field __index="1" __sourcePath="{}/object/firstName" containerType="SINGLE" label="firstName" name="firstName" type="string"/>
+<Field __index="2" __sourcePath="{}/object/id" containerType="SINGLE" label="id" name="id" type="string"/>
+<Field __index="3" __sourcePath="{}/object/isVerified" containerType="SINGLE" label="isVerified" name="isVerified" type="boolean"/>
+<Field __index="4" __sourcePath="{}/object/lastName" containerType="SINGLE" label="lastName" name="lastName" type="string"/>
+<Field __index="5" __sourcePath="{}/object/screenName" containerType="SINGLE" label="screenName" name="screenName" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry2" input="true" name="realmid" output="true" type="string"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiName="Pojo READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="emailAddress" trim="true" xpath="emailAddress"/>
+  <Mapping cloverField="firstName" trim="true" xpath="firstName"/>
+  <Mapping cloverField="id" trim="true" xpath="id"/>
+  <Mapping cloverField="isVerified" trim="true" xpath="isVerified"/>
+  <Mapping cloverField="lastName" trim="true" xpath="lastName"/>
+  <Mapping cloverField="screenName" trim="true" xpath="screenName"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="org.mule.modules.quickbooks.api.model.UserInformation"/>
+  <typed-object type="org.mule.modules.quickbooks.api.model.UserInformation">
+    <typed-object-ref name="emailAddress" type-ref="java.lang.String"/>
+    <typed-object-ref name="firstName" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="java.lang.String"/>
+    <typed-object-ref name="isVerified" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="lastName" type-ref="java.lang.String"/>
+    <typed-object-ref name="screenName" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.lang.Boolean"/>
+  <typed-object type="java.lang.String"/>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'object' -&gt; 'tenant'" guiX="460" guiY="20" id="FOREACH_OBJECT_TENANT" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.id = dictionary.realmid;
+	$out.0.enabled = true;
+;
+	$out.0.name = $in.0.screenName;
+//START -> DO NOT REMOVE
+$out.0.__id = $in.0.__id;
+//END -> DO NOT REMOVE
+	return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Node charset="UTF-8" enabled="enabled" fileURL="dict:outputPayload" guiName="JSON WRITER" guiX="900" guiY="20" id="JSON_WRITER0" type="JSON_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<tenant xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <id>$0.id</id>
+  <name>$0.name</name>
+  <enabled>$0.enabled</enabled>
+</tenant>]]></attr>
+<attr name="_data_format"><![CDATA[JSON]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="bf006961-8fe7-4fb4-bad0-1b44418a0a31" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_TENANT:0"/>
+<Edge debugMode="true" fromNode="FOREACH_OBJECT_TENANT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="acee6059-bef0-458a-a3f0-4ed78181a7fa" outPort="Port 0 (out)" toNode="JSON_WRITER0:0"/>
+</Phase>
+</Graph>

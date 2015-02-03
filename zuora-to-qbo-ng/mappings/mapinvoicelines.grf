@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="adrianhsieh" created="Mon Aug 19 22:24:42 GMT-03:00 2013" guiVersion="3.4.0.P" id="1376962526362" licenseCode="Unlicensed" licenseType="Unknown" modified="Mon Aug 19 22:24:42 GMT-03:00 2013" modifiedBy="adrianhsieh" name="mapinvoicelines_grf" preview-file="/Users/adrianhsieh/Downloads/test.txt" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata _type="Lookup" id="9ba92e74-6494-418c-9b93-4250082b29b0">
+<Record fieldDelimiter="|" name="chargenametransformflow" recordDelimiter="\n" type="delimited">
+<Field containerType="SINGLE" label="chargename" name="chargename" type="string"/>
+<Field containerType="SINGLE" label="chargeName" name="chargeName" type="string"/>
+<Field containerType="SINGLE" label="serviceStartDate" name="serviceStartDate" type="string"/>
+<Field containerType="SINGLE" label="serviceEndDate" name="serviceEndDate" type="string"/>
+</Record>
+</Metadata>
+<Metadata _type="Lookup" id="7b4b75cb-15e0-43b3-85da-947cad1cc1f3">
+<Record fieldDelimiter="|" name="itemlookupflow" recordDelimiter="\n" type="delimited">
+<Field containerType="SINGLE" label="accountingCode" name="accountingCode" type="string"/>
+<Field containerType="SINGLE" label="itemid" name="itemid" type="string"/>
+<Field containerType="SINGLE" label="realmid" name="realmid" type="string"/>
+<Field containerType="SINGLE" label="chargeName" name="chargeName" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/list" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _type="Output" id="6c6f5aab-0a2a-483f-8baa-0bee2c646b53">
+<Record fieldDelimiter="|" name="list" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/list/UOMAbbrv" containerType="SINGLE" label="UOMAbbrv" name="UOMAbbrv" type="string"/>
+<Field __index="1" __sourcePath="{}/list/UOMId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain" type="string"/>
+<Field __index="2" __sourcePath="{}/list/UOMId/value" containerType="SINGLE" label="value" name="value" type="string"/>
+<Field __index="3" __sourcePath="{}/list/amount" containerType="SINGLE" label="amount" name="amount" type="decimal"/>
+<Field __index="4" __sourcePath="{}/list/classId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_1" type="string"/>
+<Field __index="5" __sourcePath="{}/list/classId/value" containerType="SINGLE" label="value" name="value_1" type="string"/>
+<Field __index="6" __sourcePath="{}/list/className" containerType="SINGLE" label="className" name="className" type="string"/>
+<Field __index="7" __sourcePath="{}/list/custom1" containerType="SINGLE" label="custom1" name="custom1" type="string"/>
+<Field __index="8" __sourcePath="{}/list/custom2" containerType="SINGLE" label="custom2" name="custom2" type="string"/>
+<Field __index="9" __sourcePath="{}/list/desc" containerType="SINGLE" label="desc" name="desc" type="string"/>
+<Field __index="10" __sourcePath="{}/list/discountId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_2" type="string"/>
+<Field __index="11" __sourcePath="{}/list/discountId/value" containerType="SINGLE" label="value" name="value_2" type="string"/>
+<Field __index="12" __sourcePath="{}/list/discountName" containerType="SINGLE" label="discountName" name="discountName" type="string"/>
+<Field __index="13" __sourcePath="{}/list/id/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_3" type="string"/>
+<Field __index="14" __sourcePath="{}/list/id/value" containerType="SINGLE" label="value" name="value_3" type="string"/>
+<Field __index="15" __sourcePath="{}/list/itemId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_4" type="string"/>
+<Field __index="16" __sourcePath="{}/list/itemId/value" containerType="SINGLE" label="value" name="value_4" type="string"/>
+<Field __index="17" __sourcePath="{}/list/itemName" containerType="SINGLE" label="itemName" name="itemName" type="string"/>
+<Field __index="18" __sourcePath="{}/list/itemType" containerType="SINGLE" label="itemType" name="itemType" type="string"/>
+<Field __index="19" __sourcePath="{}/list/overrideItemAccountId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_5" type="string"/>
+<Field __index="20" __sourcePath="{}/list/overrideItemAccountId/value" containerType="SINGLE" label="value" name="value_5" type="string"/>
+<Field __index="21" __sourcePath="{}/list/overrideItemAccountName" containerType="SINGLE" label="overrideItemAccountName" name="overrideItemAccountName" type="string"/>
+<Field __index="22" __sourcePath="{}/list/priceLevelId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_6" type="string"/>
+<Field __index="23" __sourcePath="{}/list/priceLevelId/value" containerType="SINGLE" label="value" name="value_6" type="string"/>
+<Field __index="24" __sourcePath="{}/list/priceLevelName" containerType="SINGLE" label="priceLevelName" name="priceLevelName" type="string"/>
+<Field __index="25" __sourcePath="{}/list/qty" containerType="SINGLE" label="qty" name="qty" type="decimal"/>
+<Field __index="26" __sourcePath="{}/list/ratePercent" containerType="SINGLE" label="ratePercent" name="ratePercent" type="decimal"/>
+<Field __index="27" __sourcePath="{}/list/salesTaxCodeId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_7" type="string"/>
+<Field __index="28" __sourcePath="{}/list/salesTaxCodeId/value" containerType="SINGLE" label="value" name="value_7" type="string"/>
+<Field __index="29" __sourcePath="{}/list/salesTaxCodeName" containerType="SINGLE" label="salesTaxCodeName" name="salesTaxCodeName" type="string"/>
+<Field __index="30" __sourcePath="{}/list/serviceDate" containerType="SINGLE" label="serviceDate" name="serviceDate" type="date"/>
+<Field __index="31" __sourcePath="{}/list/taxable" containerType="SINGLE" label="taxable" name="taxable" type="boolean"/>
+<Field __index="32" __sourcePath="{}/list/txnId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_8" type="string"/>
+<Field __index="33" __sourcePath="{}/list/txnId/value" containerType="SINGLE" label="value" name="value_8" type="string"/>
+<Field __index="34" __sourcePath="{}/list/txnLineId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_9" type="string"/>
+<Field __index="35" __sourcePath="{}/list/txnLineId/value" containerType="SINGLE" label="value" name="value_9" type="string"/>
+<Field __index="36" __sourcePath="{}/list/unitPrice" containerType="SINGLE" label="unitPrice" name="unitPrice" type="decimal"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/mapinvoicelines" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _type="Input" id="cfe0f8fa-956f-40f6-94d0-c771e3639b66">
+<Record fieldDelimiter="|" name="mapinvoicelines" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="3" __sourcePath="{}/mapinvoicelines/UOM" containerType="SINGLE" label="UOM" name="UOM" type="string"/>
+<Field __index="0" __sourcePath="{}/mapinvoicelines/accountingCode" containerType="SINGLE" label="accountingCode" name="accountingCode" type="string"/>
+<Field __index="5" __sourcePath="{}/mapinvoicelines/chargeAmount" containerType="SINGLE" label="chargeAmount" name="chargeAmount" type="decimal"/>
+<Field __index="9" __sourcePath="{}/mapinvoicelines/chargeDate" containerType="SINGLE" label="chargeDate" name="chargeDate" type="string"/>
+<Field __index="6" __sourcePath="{}/mapinvoicelines/chargeName" containerType="SINGLE" label="chargeName" name="chargeName" type="string"/>
+<Field __index="1" __sourcePath="{}/mapinvoicelines/productDescription" containerType="SINGLE" label="productDescription" name="productDescription" type="string"/>
+<Field __index="11" __sourcePath="{}/mapinvoicelines/productName" containerType="SINGLE" label="productName" name="productName" type="string"/>
+<Field __index="2" __sourcePath="{}/mapinvoicelines/quantity" containerType="SINGLE" label="quantity" name="quantity" type="string"/>
+<Field __index="7" __sourcePath="{}/mapinvoicelines/revRecCode" containerType="SINGLE" label="revRecCode" name="revRecCode" type="string"/>
+<Field __index="8" __sourcePath="{}/mapinvoicelines/revRecStartDate" containerType="SINGLE" label="revRecStartDate" name="revRecStartDate" type="string"/>
+<Field __index="13" __sourcePath="{}/mapinvoicelines/serviceEndDate" containerType="SINGLE" label="serviceEndDate" name="serviceEndDate" type="string"/>
+<Field __index="12" __sourcePath="{}/mapinvoicelines/serviceStartDate" containerType="SINGLE" label="serviceStartDate" name="serviceStartDate" type="string"/>
+<Field __index="10" __sourcePath="{}/mapinvoicelines/subscriptionNumber" containerType="SINGLE" label="subscriptionNumber" name="subscriptionNumber" type="string"/>
+<Field __index="4" __sourcePath="{}/mapinvoicelines/unitPrice" containerType="SINGLE" label="unitPrice" name="unitPrice" type="decimal"/>
+</Record>
+</Metadata>
+<LookupTable flow-ref="chargename-transform-flow" id="chargenametransformflow" key="chargeName;serviceStartDate;serviceEndDate" metadata="9ba92e74-6494-418c-9b93-4250082b29b0" name="chargenametransformflow" type="muleFlowLookup">
+<attr name="lookupType"><![CDATA[FlowRef]]></attr>
+</LookupTable>
+<LookupTable flow-ref="item-lookup-flow" id="itemlookupflow" key="accountingCode;realmid;chargeName" metadata="7b4b75cb-15e0-43b3-85da-947cad1cc1f3" name="itemlookupflow" type="muleFlowLookup">
+<attr name="lookupType"><![CDATA[FlowRef]]></attr>
+</LookupTable>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry2" input="true" name="realmid" output="true" type="string"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiName="Map&lt;k,v&gt; READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="UOM" trim="true" xpath="UOM"/>
+  <Mapping cloverField="accountingCode" trim="true" xpath="accountingCode"/>
+  <Mapping cloverField="chargeAmount" trim="true" xpath="chargeAmount"/>
+  <Mapping cloverField="chargeDate" trim="true" xpath="chargeDate"/>
+  <Mapping cloverField="chargeName" trim="true" xpath="chargeName"/>
+  <Mapping cloverField="productDescription" trim="true" xpath="productDescription"/>
+  <Mapping cloverField="productName" trim="true" xpath="productName"/>
+  <Mapping cloverField="quantity" trim="true" xpath="quantity"/>
+  <Mapping cloverField="revRecCode" trim="true" xpath="revRecCode"/>
+  <Mapping cloverField="revRecStartDate" trim="true" xpath="revRecStartDate"/>
+  <Mapping cloverField="serviceEndDate" trim="true" xpath="serviceEndDate"/>
+  <Mapping cloverField="serviceStartDate" trim="true" xpath="serviceStartDate"/>
+  <Mapping cloverField="subscriptionNumber" trim="true" xpath="subscriptionNumber"/>
+  <Mapping cloverField="unitPrice" trim="true" xpath="unitPrice"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[MAP]]></attr>
+</Node>
+<Node enabled="enabled" fileURL="dict:outputPayload" guiName="Pojo WRITER" guiX="900" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<clover:collection clover:name="list" xmlns:clover="http://www.cloveretl.com/ns/xmlmapping">
+  <item clover:inPort="0">
+    <UOMAbbrv>$0.UOMAbbrv</UOMAbbrv>
+    <UOMId>
+      <idDomain>$0.idDomain</idDomain>
+      <value>$0.value</value>
+    </UOMId>
+    <amount>$0.amount</amount>
+    <classId>
+      <idDomain>$0.idDomain_1</idDomain>
+      <value>$0.value_1</value>
+    </classId>
+    <className>$0.className</className>
+    <custom1>$0.custom1</custom1>
+    <custom2>$0.custom2</custom2>
+    <desc>$0.desc</desc>
+    <discountId>
+      <idDomain>$0.idDomain_2</idDomain>
+      <value>$0.value_2</value>
+    </discountId>
+    <discountName>$0.discountName</discountName>
+    <id>
+      <idDomain>$0.idDomain_3</idDomain>
+      <value>$0.value_3</value>
+    </id>
+    <itemId>
+      <idDomain>$0.idDomain_4</idDomain>
+      <value>$0.value_4</value>
+    </itemId>
+    <itemName>$0.itemName</itemName>
+    <itemType>$0.itemType</itemType>
+    <overrideItemAccountId>
+      <idDomain>$0.idDomain_5</idDomain>
+      <value>$0.value_5</value>
+    </overrideItemAccountId>
+    <overrideItemAccountName>$0.overrideItemAccountName</overrideItemAccountName>
+    <priceLevelId>
+      <idDomain>$0.idDomain_6</idDomain>
+      <value>$0.value_6</value>
+    </priceLevelId>
+    <priceLevelName>$0.priceLevelName</priceLevelName>
+    <qty>$0.qty</qty>
+    <ratePercent>$0.ratePercent</ratePercent>
+    <salesTaxCodeId>
+      <idDomain>$0.idDomain_7</idDomain>
+      <value>$0.value_7</value>
+    </salesTaxCodeId>
+    <salesTaxCodeName>$0.salesTaxCodeName</salesTaxCodeName>
+    <serviceDate>$0.serviceDate</serviceDate>
+    <taxable>$0.taxable</taxable>
+    <txnId>
+      <idDomain>$0.idDomain_8</idDomain>
+      <value>$0.value_8</value>
+    </txnId>
+    <txnLineId>
+      <idDomain>$0.idDomain_9</idDomain>
+      <value>$0.value_9</value>
+    </txnLineId>
+    <unitPrice>$0.unitPrice</unitPrice>
+  </item>
+</clover:collection>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <schema-collection>
+    <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.InvoiceLine"/>
+  </schema-collection>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.ItemTypeEnum"/>
+  <typed-object type="java.lang.Boolean"/>
+  <typed-object type="java.math.BigDecimal"/>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="java.util.Date"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.InvoiceLine">
+    <typed-object-ref name="UOMAbbrv" type-ref="java.lang.String"/>
+    <typed-object-ref name="UOMId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="amount" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="classId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="className" type-ref="java.lang.String"/>
+    <typed-object-ref name="custom1" type-ref="java.lang.String"/>
+    <typed-object-ref name="custom2" type-ref="java.lang.String"/>
+    <typed-object-ref name="desc" type-ref="java.lang.String"/>
+    <typed-object-ref name="discountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="discountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="itemId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="itemName" type-ref="java.lang.String"/>
+    <typed-object-ref name="itemType" type-ref="org.mule.modules.quickbooks.online.schema.ItemTypeEnum"/>
+    <typed-object-ref name="overrideItemAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="overrideItemAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="priceLevelId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="priceLevelName" type-ref="java.lang.String"/>
+    <typed-object-ref name="qty" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="ratePercent" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="salesTaxCodeId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="salesTaxCodeName" type-ref="java.lang.String"/>
+    <typed-object-ref name="serviceDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="taxable" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="txnId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="txnLineId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="unitPrice" type-ref="java.math.BigDecimal"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'mapinvoicelines' -&gt; 'list'" guiX="460" guiY="20" id="FOREACH_MAPINVOICELINES_LIST" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.desc = (isnull(lookup(chargenametransformflow).get($in.0.chargeName,$in.0.serviceStartDate,$in.0.serviceEndDate)) ? null : lookup(chargenametransformflow).get($in.0.chargeName,$in.0.serviceStartDate,$in.0.serviceEndDate).chargename);;
+	$out.0.amount = $in.0.chargeAmount;
+	$out.0.serviceDate = str2date(substring($in.0.chargeDate,0,10),'yyyy-MM-dd');
+;
+	$out.0.value_4 = isnull(lookup(itemlookupflow).get($in.0.accountingCode,dictionary.realmid,$in.0.chargeName)) ? null : lookup(itemlookupflow).get($in.0.accountingCode,dictionary.realmid,$in.0.chargeName).itemid;
+	;
+//START -> DO NOT REMOVE
+$out.0.__id = $in.0.__id;
+//END -> DO NOT REMOVE
+	return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="cfe0f8fa-956f-40f6-94d0-c771e3639b66" outPort="Port 0 (out)" toNode="FOREACH_MAPINVOICELINES_LIST:0"/>
+<Edge debugMode="true" fromNode="FOREACH_MAPINVOICELINES_LIST:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="6c6f5aab-0a2a-483f-8baa-0bee2c646b53" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+</Phase>
+</Graph>

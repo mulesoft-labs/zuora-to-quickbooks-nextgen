@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="adrianhsieh" created="Tue Aug 20 09:16:47 GMT-03:00 2013" guiVersion="3.4.0.P" id="1377031084373" licenseCode="Unlicensed" licenseType="Unknown" modified="Tue Aug 20 09:16:47 GMT-03:00 2013" modifiedBy="adrianhsieh" name="mapinvoiceheader_grf" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="0" __referenceCounter="0" __sourcePath="{}/object/alternateId" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="57c721a1-9f72-4797-95e4-742fef2e990d" _parent_id="__parent_id" _type="Output" id="ba531022-60c0-45dc-9914-35c5892b0db0">
+<Record fieldDelimiter="|" name="alternateId" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/alternateId/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="1" __sourcePath="{}/object/alternateId/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="57c721a1-9f72-4797-95e4-742fef2e990d">
+<Record fieldDelimiter="|" name="Invoice" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="2" __sourcePath="{}/object/externalKey/idDomain" containerType="SINGLE" label="idDomain" name="idDomain" type="string"/>
+<Field __index="3" __sourcePath="{}/object/externalKey/value" containerType="SINGLE" label="value" name="value" type="string"/>
+<Field __index="4" __sourcePath="{}/object/header/ARAccountId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_1" type="string"/>
+<Field __index="5" __sourcePath="{}/object/header/ARAccountId/value" containerType="SINGLE" label="value" name="value_1" type="string"/>
+<Field __index="6" __sourcePath="{}/object/header/ARAccountName" containerType="SINGLE" label="ARAccountName" name="ARAccountName" type="string"/>
+<Field __index="7" __sourcePath="{}/object/header/FOB" containerType="SINGLE" label="FOB" name="FOB" type="string"/>
+<Field __index="8" __sourcePath="{}/object/header/PONumber" containerType="SINGLE" label="PONumber" name="PONumber" type="string"/>
+<Field __index="9" __sourcePath="{}/object/header/balance" containerType="SINGLE" label="balance" name="balance" type="decimal"/>
+<Field __index="10" __sourcePath="{}/object/header/billAddr/city" containerType="SINGLE" label="city" name="city" type="string"/>
+<Field __index="11" __sourcePath="{}/object/header/billAddr/country" containerType="SINGLE" label="country" name="country" type="string"/>
+<Field __index="12" __sourcePath="{}/object/header/billAddr/countryCode" containerType="SINGLE" label="countryCode" name="countryCode" type="string"/>
+<Field __index="13" __sourcePath="{}/object/header/billAddr/countrySubDivisionCode" containerType="SINGLE" label="countrySubDivisionCode" name="countrySubDivisionCode" type="string"/>
+<Field __index="14" __sourcePath="{}/object/header/billAddr/county" containerType="SINGLE" label="county" name="county" type="string"/>
+<Field __index="15" __sourcePath="{}/object/header/billAddr/countyCode" containerType="SINGLE" label="countyCode" name="countyCode" type="string"/>
+<Field __index="16" __sourcePath="{}/object/header/billAddr/dateLastVerified" containerType="SINGLE" label="dateLastVerified" name="dateLastVerified" type="date"/>
+<Field __index="17" __sourcePath="{}/object/header/billAddr/default" containerType="SINGLE" label="default" name="default" type="boolean"/>
+<Field __index="18" __sourcePath="{}/object/header/billAddr/geoCode" containerType="SINGLE" label="geoCode" name="geoCode" type="string"/>
+<Field __index="19" __sourcePath="{}/object/header/billAddr/id/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_2" type="string"/>
+<Field __index="20" __sourcePath="{}/object/header/billAddr/id/value" containerType="SINGLE" label="value" name="value_2" type="string"/>
+<Field __index="21" __sourcePath="{}/object/header/billAddr/line1" containerType="SINGLE" label="line1" name="line1" type="string"/>
+<Field __index="22" __sourcePath="{}/object/header/billAddr/line2" containerType="SINGLE" label="line2" name="line2" type="string"/>
+<Field __index="23" __sourcePath="{}/object/header/billAddr/line3" containerType="SINGLE" label="line3" name="line3" type="string"/>
+<Field __index="24" __sourcePath="{}/object/header/billAddr/line4" containerType="SINGLE" label="line4" name="line4" type="string"/>
+<Field __index="25" __sourcePath="{}/object/header/billAddr/line5" containerType="SINGLE" label="line5" name="line5" type="string"/>
+<Field __index="26" __sourcePath="{}/object/header/billAddr/postalCode" containerType="SINGLE" label="postalCode" name="postalCode" type="string"/>
+<Field __index="27" __sourcePath="{}/object/header/billAddr/postalCodeSuffix" containerType="SINGLE" label="postalCodeSuffix" name="postalCodeSuffix" type="string"/>
+<Field __index="28" __sourcePath="{}/object/header/billAddr/tag" containerType="list" label="tag" name="tag" type="string"/>
+<Field __index="29" __sourcePath="{}/object/header/billEmail" containerType="SINGLE" label="billEmail" name="billEmail" type="string"/>
+<Field __index="30" __sourcePath="{}/object/header/classId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_3" type="string"/>
+<Field __index="31" __sourcePath="{}/object/header/classId/value" containerType="SINGLE" label="value" name="value_3" type="string"/>
+<Field __index="32" __sourcePath="{}/object/header/className" containerType="SINGLE" label="className" name="className" type="string"/>
+<Field __index="33" __sourcePath="{}/object/header/currency" containerType="SINGLE" label="currency" name="currency" type="string"/>
+<Field __index="34" __sourcePath="{}/object/header/custom" containerType="SINGLE" label="custom" name="custom" type="string"/>
+<Field __index="35" __sourcePath="{}/object/header/customerId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_4" type="string"/>
+<Field __index="36" __sourcePath="{}/object/header/customerId/value" containerType="SINGLE" label="value" name="value_4" type="string"/>
+<Field __index="37" __sourcePath="{}/object/header/customerName" containerType="SINGLE" label="customerName" name="customerName" type="string"/>
+<Field __index="38" __sourcePath="{}/object/header/discountAccountId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_5" type="string"/>
+<Field __index="39" __sourcePath="{}/object/header/discountAccountId/value" containerType="SINGLE" label="value" name="value_5" type="string"/>
+<Field __index="40" __sourcePath="{}/object/header/discountAccountName" containerType="SINGLE" label="discountAccountName" name="discountAccountName" type="string"/>
+<Field __index="41" __sourcePath="{}/object/header/discountAmt" containerType="SINGLE" label="discountAmt" name="discountAmt" type="decimal"/>
+<Field __index="42" __sourcePath="{}/object/header/discountRate" containerType="SINGLE" label="discountRate" name="discountRate" type="decimal"/>
+<Field __index="43" __sourcePath="{}/object/header/discountTaxable" containerType="SINGLE" label="discountTaxable" name="discountTaxable" type="boolean"/>
+<Field __index="44" __sourcePath="{}/object/header/docNumber" containerType="SINGLE" label="docNumber" name="docNumber" type="string"/>
+<Field __index="45" __sourcePath="{}/object/header/dueDate" containerType="SINGLE" label="dueDate" name="dueDate" type="date"/>
+<Field __index="46" __sourcePath="{}/object/header/jobId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_6" type="string"/>
+<Field __index="47" __sourcePath="{}/object/header/jobId/value" containerType="SINGLE" label="value" name="value_6" type="string"/>
+<Field __index="48" __sourcePath="{}/object/header/jobName" containerType="SINGLE" label="jobName" name="jobName" type="string"/>
+<Field __index="49" __sourcePath="{}/object/header/msg" containerType="SINGLE" label="msg" name="msg" type="string"/>
+<Field __index="50" __sourcePath="{}/object/header/note" containerType="SINGLE" label="note" name="note" type="string"/>
+<Field __index="51" __sourcePath="{}/object/header/remitToId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_7" type="string"/>
+<Field __index="52" __sourcePath="{}/object/header/remitToId/value" containerType="SINGLE" label="value" name="value_7" type="string"/>
+<Field __index="53" __sourcePath="{}/object/header/remitToName" containerType="SINGLE" label="remitToName" name="remitToName" type="string"/>
+<Field __index="54" __sourcePath="{}/object/header/salesRepId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_8" type="string"/>
+<Field __index="55" __sourcePath="{}/object/header/salesRepId/value" containerType="SINGLE" label="value" name="value_8" type="string"/>
+<Field __index="56" __sourcePath="{}/object/header/salesRepName" containerType="SINGLE" label="salesRepName" name="salesRepName" type="string"/>
+<Field __index="57" __sourcePath="{}/object/header/salesTaxCodeId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_9" type="string"/>
+<Field __index="58" __sourcePath="{}/object/header/salesTaxCodeId/value" containerType="SINGLE" label="value" name="value_9" type="string"/>
+<Field __index="59" __sourcePath="{}/object/header/salesTaxCodeName" containerType="SINGLE" label="salesTaxCodeName" name="salesTaxCodeName" type="string"/>
+<Field __index="60" __sourcePath="{}/object/header/salesTermId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_10" type="string"/>
+<Field __index="61" __sourcePath="{}/object/header/salesTermId/value" containerType="SINGLE" label="value" name="value_10" type="string"/>
+<Field __index="62" __sourcePath="{}/object/header/salesTermName" containerType="SINGLE" label="salesTermName" name="salesTermName" type="string"/>
+<Field __index="63" __sourcePath="{}/object/header/shipAddr/city" containerType="SINGLE" label="city" name="city_1" type="string"/>
+<Field __index="64" __sourcePath="{}/object/header/shipAddr/country" containerType="SINGLE" label="country" name="country_1" type="string"/>
+<Field __index="65" __sourcePath="{}/object/header/shipAddr/countryCode" containerType="SINGLE" label="countryCode" name="countryCode_1" type="string"/>
+<Field __index="66" __sourcePath="{}/object/header/shipAddr/countrySubDivisionCode" containerType="SINGLE" label="countrySubDivisionCode" name="countrySubDivisionCode_1" type="string"/>
+<Field __index="67" __sourcePath="{}/object/header/shipAddr/county" containerType="SINGLE" label="county" name="county_1" type="string"/>
+<Field __index="68" __sourcePath="{}/object/header/shipAddr/countyCode" containerType="SINGLE" label="countyCode" name="countyCode_1" type="string"/>
+<Field __index="69" __sourcePath="{}/object/header/shipAddr/dateLastVerified" containerType="SINGLE" label="dateLastVerified" name="dateLastVerified_1" type="date"/>
+<Field __index="70" __sourcePath="{}/object/header/shipAddr/default" containerType="SINGLE" label="default" name="default_1" type="boolean"/>
+<Field __index="71" __sourcePath="{}/object/header/shipAddr/geoCode" containerType="SINGLE" label="geoCode" name="geoCode_1" type="string"/>
+<Field __index="72" __sourcePath="{}/object/header/shipAddr/id/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_11" type="string"/>
+<Field __index="73" __sourcePath="{}/object/header/shipAddr/id/value" containerType="SINGLE" label="value" name="value_11" type="string"/>
+<Field __index="74" __sourcePath="{}/object/header/shipAddr/line1" containerType="SINGLE" label="line1" name="line1_1" type="string"/>
+<Field __index="75" __sourcePath="{}/object/header/shipAddr/line2" containerType="SINGLE" label="line2" name="line2_1" type="string"/>
+<Field __index="76" __sourcePath="{}/object/header/shipAddr/line3" containerType="SINGLE" label="line3" name="line3_1" type="string"/>
+<Field __index="77" __sourcePath="{}/object/header/shipAddr/line4" containerType="SINGLE" label="line4" name="line4_1" type="string"/>
+<Field __index="78" __sourcePath="{}/object/header/shipAddr/line5" containerType="SINGLE" label="line5" name="line5_1" type="string"/>
+<Field __index="79" __sourcePath="{}/object/header/shipAddr/postalCode" containerType="SINGLE" label="postalCode" name="postalCode_1" type="string"/>
+<Field __index="80" __sourcePath="{}/object/header/shipAddr/postalCodeSuffix" containerType="SINGLE" label="postalCodeSuffix" name="postalCodeSuffix_1" type="string"/>
+<Field __index="81" __sourcePath="{}/object/header/shipAddr/tag" containerType="list" label="tag" name="tag_1" type="string"/>
+<Field __index="82" __sourcePath="{}/object/header/shipDate" containerType="SINGLE" label="shipDate" name="shipDate" type="date"/>
+<Field __index="83" __sourcePath="{}/object/header/shipMethodId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_12" type="string"/>
+<Field __index="84" __sourcePath="{}/object/header/shipMethodId/value" containerType="SINGLE" label="value" name="value_12" type="string"/>
+<Field __index="85" __sourcePath="{}/object/header/shipMethodName" containerType="SINGLE" label="shipMethodName" name="shipMethodName" type="string"/>
+<Field __index="86" __sourcePath="{}/object/header/status" containerType="SINGLE" label="status" name="status" type="string"/>
+<Field __index="87" __sourcePath="{}/object/header/subTotalAmt" containerType="SINGLE" label="subTotalAmt" name="subTotalAmt" type="decimal"/>
+<Field __index="88" __sourcePath="{}/object/header/taxAmt" containerType="SINGLE" label="taxAmt" name="taxAmt" type="decimal"/>
+<Field __index="89" __sourcePath="{}/object/header/taxGroupId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_13" type="string"/>
+<Field __index="90" __sourcePath="{}/object/header/taxGroupId/value" containerType="SINGLE" label="value" name="value_13" type="string"/>
+<Field __index="91" __sourcePath="{}/object/header/taxGroupName" containerType="SINGLE" label="taxGroupName" name="taxGroupName" type="string"/>
+<Field __index="92" __sourcePath="{}/object/header/taxId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_14" type="string"/>
+<Field __index="93" __sourcePath="{}/object/header/taxId/value" containerType="SINGLE" label="value" name="value_14" type="string"/>
+<Field __index="94" __sourcePath="{}/object/header/taxName" containerType="SINGLE" label="taxName" name="taxName" type="string"/>
+<Field __index="95" __sourcePath="{}/object/header/taxRate" containerType="SINGLE" label="taxRate" name="taxRate" type="decimal"/>
+<Field __index="96" __sourcePath="{}/object/header/toBeEmailed" containerType="SINGLE" label="toBeEmailed" name="toBeEmailed" type="boolean"/>
+<Field __index="97" __sourcePath="{}/object/header/toBePrinted" containerType="SINGLE" label="toBePrinted" name="toBePrinted" type="boolean"/>
+<Field __index="98" __sourcePath="{}/object/header/totalAmt" containerType="SINGLE" label="totalAmt" name="totalAmt" type="decimal"/>
+<Field __index="99" __sourcePath="{}/object/header/txnDate" containerType="SINGLE" label="txnDate" name="txnDate" type="date"/>
+<Field __index="102" __sourcePath="{}/object/id/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_15" type="string"/>
+<Field __index="103" __sourcePath="{}/object/id/value" containerType="SINGLE" label="value" name="value_15" type="string"/>
+<Field __index="141" __sourcePath="{}/object/metaData/createTime" containerType="SINGLE" label="createTime" name="createTime" type="date"/>
+<Field __index="142" __sourcePath="{}/object/metaData/createdBy" containerType="SINGLE" label="createdBy" name="createdBy" type="string"/>
+<Field __index="143" __sourcePath="{}/object/metaData/createdById" containerType="SINGLE" label="createdById" name="createdById" type="string"/>
+<Field __index="144" __sourcePath="{}/object/metaData/lastModifiedBy" containerType="SINGLE" label="lastModifiedBy" name="lastModifiedBy" type="string"/>
+<Field __index="145" __sourcePath="{}/object/metaData/lastModifiedById" containerType="SINGLE" label="lastModifiedById" name="lastModifiedById" type="string"/>
+<Field __index="146" __sourcePath="{}/object/metaData/lastUpdatedTime" containerType="SINGLE" label="lastUpdatedTime" name="lastUpdatedTime" type="date"/>
+<Field __index="147" __sourcePath="{}/object/syncToken" containerType="SINGLE" label="syncToken" name="syncToken" type="string"/>
+<Field __index="148" __sourcePath="{}/object/synchronized" containerType="SINGLE" label="synchronized" name="synchronized" type="boolean"/>
+</Record>
+</Metadata>
+<Metadata __index="104" __referenceCounter="0" __sourcePath="{}/object/line" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="57c721a1-9f72-4797-95e4-742fef2e990d" _parent_id="__parent_id" _type="Output" id="df376368-f277-46c9-82e7-30c3f551c79a">
+<Record fieldDelimiter="|" name="line" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="104" __sourcePath="{}/object/line/UOMAbbrv" containerType="SINGLE" label="UOMAbbrv" name="UOMAbbrv" type="string"/>
+<Field __index="105" __sourcePath="{}/object/line/UOMId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain" type="string"/>
+<Field __index="106" __sourcePath="{}/object/line/UOMId/value" containerType="SINGLE" label="value" name="value" type="string"/>
+<Field __index="107" __sourcePath="{}/object/line/amount" containerType="SINGLE" label="amount" name="amount" type="decimal"/>
+<Field __index="108" __sourcePath="{}/object/line/classId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_1" type="string"/>
+<Field __index="109" __sourcePath="{}/object/line/classId/value" containerType="SINGLE" label="value" name="value_1" type="string"/>
+<Field __index="110" __sourcePath="{}/object/line/className" containerType="SINGLE" label="className" name="className" type="string"/>
+<Field __index="111" __sourcePath="{}/object/line/custom1" containerType="SINGLE" label="custom1" name="custom1" type="string"/>
+<Field __index="112" __sourcePath="{}/object/line/custom2" containerType="SINGLE" label="custom2" name="custom2" type="string"/>
+<Field __index="113" __sourcePath="{}/object/line/desc" containerType="SINGLE" label="desc" name="desc" type="string"/>
+<Field __index="114" __sourcePath="{}/object/line/discountId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_2" type="string"/>
+<Field __index="115" __sourcePath="{}/object/line/discountId/value" containerType="SINGLE" label="value" name="value_2" type="string"/>
+<Field __index="116" __sourcePath="{}/object/line/discountName" containerType="SINGLE" label="discountName" name="discountName" type="string"/>
+<Field __index="117" __sourcePath="{}/object/line/id/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_3" type="string"/>
+<Field __index="118" __sourcePath="{}/object/line/id/value" containerType="SINGLE" label="value" name="value_3" type="string"/>
+<Field __index="119" __sourcePath="{}/object/line/itemId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_4" type="string"/>
+<Field __index="120" __sourcePath="{}/object/line/itemId/value" containerType="SINGLE" label="value" name="value_4" type="string"/>
+<Field __index="121" __sourcePath="{}/object/line/itemName" containerType="SINGLE" label="itemName" name="itemName" type="string"/>
+<Field __index="122" __sourcePath="{}/object/line/itemType" containerType="SINGLE" label="itemType" name="itemType" type="string"/>
+<Field __index="123" __sourcePath="{}/object/line/overrideItemAccountId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_5" type="string"/>
+<Field __index="124" __sourcePath="{}/object/line/overrideItemAccountId/value" containerType="SINGLE" label="value" name="value_5" type="string"/>
+<Field __index="125" __sourcePath="{}/object/line/overrideItemAccountName" containerType="SINGLE" label="overrideItemAccountName" name="overrideItemAccountName" type="string"/>
+<Field __index="126" __sourcePath="{}/object/line/priceLevelId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_6" type="string"/>
+<Field __index="127" __sourcePath="{}/object/line/priceLevelId/value" containerType="SINGLE" label="value" name="value_6" type="string"/>
+<Field __index="128" __sourcePath="{}/object/line/priceLevelName" containerType="SINGLE" label="priceLevelName" name="priceLevelName" type="string"/>
+<Field __index="129" __sourcePath="{}/object/line/qty" containerType="SINGLE" label="qty" name="qty" type="decimal"/>
+<Field __index="130" __sourcePath="{}/object/line/ratePercent" containerType="SINGLE" label="ratePercent" name="ratePercent" type="decimal"/>
+<Field __index="131" __sourcePath="{}/object/line/salesTaxCodeId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_7" type="string"/>
+<Field __index="132" __sourcePath="{}/object/line/salesTaxCodeId/value" containerType="SINGLE" label="value" name="value_7" type="string"/>
+<Field __index="133" __sourcePath="{}/object/line/salesTaxCodeName" containerType="SINGLE" label="salesTaxCodeName" name="salesTaxCodeName" type="string"/>
+<Field __index="134" __sourcePath="{}/object/line/serviceDate" containerType="SINGLE" label="serviceDate" name="serviceDate" type="date"/>
+<Field __index="135" __sourcePath="{}/object/line/taxable" containerType="SINGLE" label="taxable" name="taxable" type="boolean"/>
+<Field __index="136" __sourcePath="{}/object/line/txnId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_8" type="string"/>
+<Field __index="137" __sourcePath="{}/object/line/txnId/value" containerType="SINGLE" label="value" name="value_8" type="string"/>
+<Field __index="138" __sourcePath="{}/object/line/txnLineId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_9" type="string"/>
+<Field __index="139" __sourcePath="{}/object/line/txnLineId/value" containerType="SINGLE" label="value" name="value_9" type="string"/>
+<Field __index="140" __sourcePath="{}/object/line/unitPrice" containerType="SINGLE" label="unitPrice" name="unitPrice" type="decimal"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/mapqbinvoice" _dataStructure="OBJECT" _id="__id" _type="Input" id="8fccb16b-a9b8-4bd8-be3d-50309fa06318">
+<Record fieldDelimiter="|" name="mapqbinvoice" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="1" __sourcePath="{}/mapqbinvoice/address1" containerType="SINGLE" label="address1" name="address1" type="string"/>
+<Field __index="2" __sourcePath="{}/mapqbinvoice/address2" containerType="SINGLE" label="address2" name="address2" type="string"/>
+<Field __index="3" __sourcePath="{}/mapqbinvoice/city" containerType="SINGLE" label="city" name="city" type="string"/>
+<Field __index="6" __sourcePath="{}/mapqbinvoice/country" containerType="SINGLE" label="country" name="country" type="string"/>
+<Field __index="4" __sourcePath="{}/mapqbinvoice/postalcode" containerType="SINGLE" label="postalcode" name="postalcode" type="string"/>
+<Field __index="5" __sourcePath="{}/mapqbinvoice/state" containerType="SINGLE" label="state" name="state" type="string"/>
+<Field __index="0" __sourcePath="{}/mapqbinvoice/workEmail" containerType="SINGLE" label="workEmail" name="workEmail" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="149" __referenceCounter="0" __sourcePath="{}/object/taxLine" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="57c721a1-9f72-4797-95e4-742fef2e990d" _parent_id="__parent_id" _type="Output" id="35e9c9f0-f72d-4fbb-8490-4bd19fc1738f">
+<Record fieldDelimiter="|" name="taxLine" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="149" __sourcePath="{}/object/taxLine/amount" containerType="SINGLE" label="amount" name="amount" type="decimal"/>
+<Field __index="150" __sourcePath="{}/object/taxLine/desc" containerType="SINGLE" label="desc" name="desc" type="string"/>
+<Field __index="151" __sourcePath="{}/object/taxLine/id/idDomain" containerType="SINGLE" label="idDomain" name="idDomain" type="string"/>
+<Field __index="152" __sourcePath="{}/object/taxLine/id/value" containerType="SINGLE" label="value" name="value" type="string"/>
+<Field __index="153" __sourcePath="{}/object/taxLine/taxId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_1" type="string"/>
+<Field __index="154" __sourcePath="{}/object/taxLine/taxId/value" containerType="SINGLE" label="value" name="value_1" type="string"/>
+<Field __index="155" __sourcePath="{}/object/taxLine/taxName" containerType="SINGLE" label="taxName" name="taxName" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="100" __referenceCounter="0" __sourcePath="{}/object/header/txnId" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="57c721a1-9f72-4797-95e4-742fef2e990d" _parent_id="__parent_id" _type="Output" id="06c324ff-8759-43bf-baae-e5121ff6fadc">
+<Record fieldDelimiter="|" name="txnId" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="100" __sourcePath="{}/object/header/txnId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain" type="string"/>
+<Field __index="101" __sourcePath="{}/object/header/txnId/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry2" input="true" name="qbcustomerid" output="true" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry4" input="true" name="paymentterm" output="true" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry5" input="true" name="invoicenumber" output="true" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry6" input="true" name="invoicedate" output="true" type="string"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry7" input="true" name="duedate" output="true" type="string"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiName="Map&lt;k,v&gt; READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="address1" trim="true" xpath="address1"/>
+  <Mapping cloverField="address2" trim="true" xpath="address2"/>
+  <Mapping cloverField="city" trim="true" xpath="city"/>
+  <Mapping cloverField="country" trim="true" xpath="country"/>
+  <Mapping cloverField="postalcode" trim="true" xpath="postalcode"/>
+  <Mapping cloverField="state" trim="true" xpath="state"/>
+  <Mapping cloverField="workEmail" trim="true" xpath="workEmail"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[MAP]]></attr>
+</Node>
+<Node enabled="enabled" fileURL="dict:outputPayload" guiName="Pojo WRITER" guiX="900" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <externalKey>
+    <idDomain>$0.idDomain</idDomain>
+    <value>$0.value</value>
+  </externalKey>
+  <header>
+    <ARAccountId>
+      <idDomain>$0.idDomain_1</idDomain>
+      <value>$0.value_1</value>
+    </ARAccountId>
+    <ARAccountName>$0.ARAccountName</ARAccountName>
+    <FOB>$0.FOB</FOB>
+    <PONumber>$0.PONumber</PONumber>
+    <balance>$0.balance</balance>
+    <billAddr>
+      <city>$0.city</city>
+      <country>$0.country</country>
+      <countryCode>$0.countryCode</countryCode>
+      <countrySubDivisionCode>$0.countrySubDivisionCode</countrySubDivisionCode>
+      <county>$0.county</county>
+      <countyCode>$0.countyCode</countyCode>
+      <dateLastVerified>$0.dateLastVerified</dateLastVerified>
+      <default>$0.default</default>
+      <geoCode>$0.geoCode</geoCode>
+      <id>
+        <idDomain>$0.idDomain_2</idDomain>
+        <value>$0.value_2</value>
+      </id>
+      <line1>$0.line1</line1>
+      <line2>$0.line2</line2>
+      <line3>$0.line3</line3>
+      <line4>$0.line4</line4>
+      <line5>$0.line5</line5>
+      <postalCode>$0.postalCode</postalCode>
+      <postalCodeSuffix>$0.postalCodeSuffix</postalCodeSuffix>
+      <clover:collection clover:name="tag">$0.tag</clover:collection>
+    </billAddr>
+    <billEmail>$0.billEmail</billEmail>
+    <classId>
+      <idDomain>$0.idDomain_3</idDomain>
+      <value>$0.value_3</value>
+    </classId>
+    <className>$0.className</className>
+    <currency>$0.currency</currency>
+    <custom>$0.custom</custom>
+    <customerId>
+      <idDomain>$0.idDomain_4</idDomain>
+      <value>$0.value_4</value>
+    </customerId>
+    <customerName>$0.customerName</customerName>
+    <discountAccountId>
+      <idDomain>$0.idDomain_5</idDomain>
+      <value>$0.value_5</value>
+    </discountAccountId>
+    <discountAccountName>$0.discountAccountName</discountAccountName>
+    <discountAmt>$0.discountAmt</discountAmt>
+    <discountRate>$0.discountRate</discountRate>
+    <discountTaxable>$0.discountTaxable</discountTaxable>
+    <docNumber>$0.docNumber</docNumber>
+    <dueDate>$0.dueDate</dueDate>
+    <jobId>
+      <idDomain>$0.idDomain_6</idDomain>
+      <value>$0.value_6</value>
+    </jobId>
+    <jobName>$0.jobName</jobName>
+    <msg>$0.msg</msg>
+    <note>$0.note</note>
+    <remitToId>
+      <idDomain>$0.idDomain_7</idDomain>
+      <value>$0.value_7</value>
+    </remitToId>
+    <remitToName>$0.remitToName</remitToName>
+    <salesRepId>
+      <idDomain>$0.idDomain_8</idDomain>
+      <value>$0.value_8</value>
+    </salesRepId>
+    <salesRepName>$0.salesRepName</salesRepName>
+    <salesTaxCodeId>
+      <idDomain>$0.idDomain_9</idDomain>
+      <value>$0.value_9</value>
+    </salesTaxCodeId>
+    <salesTaxCodeName>$0.salesTaxCodeName</salesTaxCodeName>
+    <salesTermId>
+      <idDomain>$0.idDomain_10</idDomain>
+      <value>$0.value_10</value>
+    </salesTermId>
+    <salesTermName>$0.salesTermName</salesTermName>
+    <shipAddr>
+      <city>$0.city_1</city>
+      <country>$0.country_1</country>
+      <countryCode>$0.countryCode_1</countryCode>
+      <countrySubDivisionCode>$0.countrySubDivisionCode_1</countrySubDivisionCode>
+      <county>$0.county_1</county>
+      <countyCode>$0.countyCode_1</countyCode>
+      <dateLastVerified>$0.dateLastVerified_1</dateLastVerified>
+      <default>$0.default_1</default>
+      <geoCode>$0.geoCode_1</geoCode>
+      <id>
+        <idDomain>$0.idDomain_11</idDomain>
+        <value>$0.value_11</value>
+      </id>
+      <line1>$0.line1_1</line1>
+      <line2>$0.line2_1</line2>
+      <line3>$0.line3_1</line3>
+      <line4>$0.line4_1</line4>
+      <line5>$0.line5_1</line5>
+      <postalCode>$0.postalCode_1</postalCode>
+      <postalCodeSuffix>$0.postalCodeSuffix_1</postalCodeSuffix>
+      <clover:collection clover:name="tag">$0.tag_1</clover:collection>
+    </shipAddr>
+    <shipDate>$0.shipDate</shipDate>
+    <shipMethodId>
+      <idDomain>$0.idDomain_12</idDomain>
+      <value>$0.value_12</value>
+    </shipMethodId>
+    <shipMethodName>$0.shipMethodName</shipMethodName>
+    <status>$0.status</status>
+    <subTotalAmt>$0.subTotalAmt</subTotalAmt>
+    <taxAmt>$0.taxAmt</taxAmt>
+    <taxGroupId>
+      <idDomain>$0.idDomain_13</idDomain>
+      <value>$0.value_13</value>
+    </taxGroupId>
+    <taxGroupName>$0.taxGroupName</taxGroupName>
+    <taxId>
+      <idDomain>$0.idDomain_14</idDomain>
+      <value>$0.value_14</value>
+    </taxId>
+    <taxName>$0.taxName</taxName>
+    <taxRate>$0.taxRate</taxRate>
+    <toBeEmailed>$0.toBeEmailed</toBeEmailed>
+    <toBePrinted>$0.toBePrinted</toBePrinted>
+    <totalAmt>$0.totalAmt</totalAmt>
+    <txnDate>$0.txnDate</txnDate>
+  </header>
+  <id>
+    <idDomain>$0.idDomain_15</idDomain>
+    <value>$0.value_15</value>
+  </id>
+  <metaData>
+    <createTime>$0.createTime</createTime>
+    <createdBy>$0.createdBy</createdBy>
+    <createdById>$0.createdById</createdById>
+    <lastModifiedBy>$0.lastModifiedBy</lastModifiedBy>
+    <lastModifiedById>$0.lastModifiedById</lastModifiedById>
+    <lastUpdatedTime>$0.lastUpdatedTime</lastUpdatedTime>
+  </metaData>
+  <syncToken>$0.syncToken</syncToken>
+  <synchronized>$0.synchronized</synchronized>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.Invoice"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.TaxLine">
+    <typed-object-ref name="amount" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="desc" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="taxId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="taxName" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.lang.Boolean"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.ModificationMetaData">
+    <typed-object-ref name="createTime" type-ref="java.util.Date"/>
+    <typed-object-ref name="createdBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="createdById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastUpdatedTime" type-ref="java.util.Date"/>
+  </typed-object>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.PhysicalAddress">
+    <typed-object-ref name="city" type-ref="java.lang.String"/>
+    <typed-object-ref name="country" type-ref="java.lang.String"/>
+    <typed-object-ref name="countryCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="countrySubDivisionCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="county" type-ref="java.lang.String"/>
+    <typed-object-ref name="countyCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="dateLastVerified" type-ref="java.util.Date"/>
+    <typed-object-ref name="default" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="geoCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="line1" type-ref="java.lang.String"/>
+    <typed-object-ref name="line2" type-ref="java.lang.String"/>
+    <typed-object-ref name="line3" type-ref="java.lang.String"/>
+    <typed-object-ref name="line4" type-ref="java.lang.String"/>
+    <typed-object-ref name="line5" type-ref="java.lang.String"/>
+    <typed-object-ref name="postalCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="postalCodeSuffix" type-ref="java.lang.String"/>
+    <schema-collection name="tag" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="java.util.Date"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.InvoiceLine">
+    <typed-object-ref name="UOMAbbrv" type-ref="java.lang.String"/>
+    <typed-object-ref name="UOMId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="amount" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="classId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="className" type-ref="java.lang.String"/>
+    <typed-object-ref name="custom1" type-ref="java.lang.String"/>
+    <typed-object-ref name="custom2" type-ref="java.lang.String"/>
+    <typed-object-ref name="desc" type-ref="java.lang.String"/>
+    <typed-object-ref name="discountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="discountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="itemId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="itemName" type-ref="java.lang.String"/>
+    <typed-object-ref name="itemType" type-ref="org.mule.modules.quickbooks.online.schema.ItemTypeEnum"/>
+    <typed-object-ref name="overrideItemAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="overrideItemAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="priceLevelId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="priceLevelName" type-ref="java.lang.String"/>
+    <typed-object-ref name="qty" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="ratePercent" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="salesTaxCodeId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="salesTaxCodeName" type-ref="java.lang.String"/>
+    <typed-object-ref name="serviceDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="taxable" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="txnId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="txnLineId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="unitPrice" type-ref="java.math.BigDecimal"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CurrencyCode"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.ItemTypeEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.NameValue">
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.Invoice">
+    <schema-collection name="alternateId" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.NameValue"/>
+    </schema-collection>
+    <typed-object-ref name="externalKey" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="header" type-ref="org.mule.modules.quickbooks.online.schema.InvoiceHeader"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <schema-collection name="line" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.InvoiceLine"/>
+    </schema-collection>
+    <typed-object-ref name="metaData" type-ref="org.mule.modules.quickbooks.online.schema.ModificationMetaData"/>
+    <typed-object-ref name="syncToken" type-ref="java.lang.String"/>
+    <typed-object-ref name="synchronized" type-ref="java.lang.Boolean"/>
+    <schema-collection name="taxLine" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.TaxLine"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="java.math.BigDecimal"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.InvoiceHeader">
+    <typed-object-ref name="ARAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="ARAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="FOB" type-ref="java.lang.String"/>
+    <typed-object-ref name="PONumber" type-ref="java.lang.String"/>
+    <typed-object-ref name="balance" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="billAddr" type-ref="org.mule.modules.quickbooks.online.schema.PhysicalAddress"/>
+    <typed-object-ref name="billEmail" type-ref="java.lang.String"/>
+    <typed-object-ref name="classId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="className" type-ref="java.lang.String"/>
+    <typed-object-ref name="currency" type-ref="org.mule.modules.quickbooks.online.schema.CurrencyCode"/>
+    <typed-object-ref name="custom" type-ref="java.lang.String"/>
+    <typed-object-ref name="customerId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="customerName" type-ref="java.lang.String"/>
+    <typed-object-ref name="discountAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="discountAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="discountAmt" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="discountRate" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="discountTaxable" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="docNumber" type-ref="java.lang.String"/>
+    <typed-object-ref name="dueDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="jobId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="jobName" type-ref="java.lang.String"/>
+    <typed-object-ref name="msg" type-ref="java.lang.String"/>
+    <typed-object-ref name="note" type-ref="java.lang.String"/>
+    <typed-object-ref name="remitToId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="remitToName" type-ref="java.lang.String"/>
+    <typed-object-ref name="salesRepId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="salesRepName" type-ref="java.lang.String"/>
+    <typed-object-ref name="salesTaxCodeId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="salesTaxCodeName" type-ref="java.lang.String"/>
+    <typed-object-ref name="salesTermId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="salesTermName" type-ref="java.lang.String"/>
+    <typed-object-ref name="shipAddr" type-ref="org.mule.modules.quickbooks.online.schema.PhysicalAddress"/>
+    <typed-object-ref name="shipDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="shipMethodId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="shipMethodName" type-ref="java.lang.String"/>
+    <typed-object-ref name="status" type-ref="java.lang.String"/>
+    <typed-object-ref name="subTotalAmt" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="taxAmt" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="taxGroupId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="taxGroupName" type-ref="java.lang.String"/>
+    <typed-object-ref name="taxId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="taxName" type-ref="java.lang.String"/>
+    <typed-object-ref name="taxRate" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="toBeEmailed" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="toBePrinted" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="totalAmt" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="txnDate" type-ref="java.util.Date"/>
+    <schema-collection name="txnId" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'mapqbinvoice' -&gt; 'object'" guiX="460" guiY="20" id="FOREACH_MAPQBINVOICE_OBJECT" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.salesTermName = dictionary.paymentterm;
+	$out.0.docNumber = dictionary.invoicenumber;
+		$out.0.txnDate = str2date(substring(dictionary.invoicedate,0,10),'yyyy-MM-dd');
+	$out.0.dueDate = str2date(substring(dictionary.duedate,0,10),'yyyy-MM-dd');
+	$out.0.value_4 = dictionary.qbcustomerid;
+	$out.0.billEmail = $in.0.workEmail;
+	$out.0.countrySubDivisionCode = $in.0.state;
+	$out.0.line2 = $in.0.address2;
+	$out.0.line1 = $in.0.address1;
+//START -> DO NOT REMOVE
+$out.0.__id = $in.0.__id;
+//END -> DO NOT REMOVE
+$out.0.city = $in.0.city;
+$out.0.country = $in.0.country;
+$out.0.postalCode = $in.0.postalcode;
+	return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="8fccb16b-a9b8-4bd8-be3d-50309fa06318" outPort="Port 0 (out)" toNode="FOREACH_MAPQBINVOICE_OBJECT:0"/>
+<Edge debugMode="true" fromNode="FOREACH_MAPQBINVOICE_OBJECT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="57c721a1-9f72-4797-95e4-742fef2e990d" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+</Phase>
+</Graph>

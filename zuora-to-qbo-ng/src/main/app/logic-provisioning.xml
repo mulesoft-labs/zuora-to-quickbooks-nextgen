@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:quickbooks="http://www.mulesoft.org/schema/mule/quickbooks" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:https="http://www.mulesoft.org/schema/mule/https" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
+http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/4.0/mule-quickbooks.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd">
+    <https:connector name="https-connector" cookieSpec="netscape" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="HTTP\HTTPS">
+        <https:tls-key-store path="keystore" keyPassword="${keystore.password}" storePassword="${keystore.password}"/>
+    </https:connector>
+    <data-mapper:config name="new_mapping_grf" transformationGraphPath="new_mapping.grf" doc:name="DataMapper"/>
+    <flow name="initialize-openid-flow" doc:name="initialize-openid-flow">
+        <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="${https.port}" path="initializeopenid" connector-ref="https-connector" doc:name="initializeopenid"/>
+        <quickbooks:open-id-initialize config-ref="quickbooks" callbackUrl="https://${fullDomain}/verifyopenid" doc:name="oped-id-initialize"/>
+    </flow>
+    <flow name="verify-openid-flow" doc:name="verify-openid-flow">
+        <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="${https.port}" path="verifyopenid" connector-ref="https-connector" doc:name="verifyopenid"/>
+		<logger message="verifying openid" level="INFO" doc:name="verifying openid"/>
+        <quickbooks:verify-open-id config-ref="quickbooks" doc:name="verify-openid"/>
+        <quickbooks:auth-user config-ref="quickbooks" accessTokenUrl="https://oauth.intuit.com/oauth/v1/get_access_token" authorizationUrl="https://appcenter.intuit.com/Connect/Begin" callbackUrl="https://${fullDomain}/oauthtoken" requestTokenId="#[header:inbound:openid.sig]" requestTokenUrl="https://oauth.intuit.com/oauth/v1/get_request_token" doc:name="auth-user"/>
+    </flow>
+    <flow name="oauth-token-flow" doc:name="oauth-token-flow">
+        <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="${https.port}" path="oauthtoken" connector-ref="https-connector" doc:name="oauthtoken"/>
+		<logger message="oauth token flow" level="INFO" doc:name="oauth token flow"/>
+        <set-variable variableName="realmid" value="#[header:inbound:realmId]" doc:name="realmid"/>
+        <quickbooks:get-access-token config-ref="quickbooks" doc:name="get-access-token"/>
+        <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="insertTokenDate" queryTimeout="-1" connector-ref="jdbcConnector" doc:name="insert-token-date"/>
+		<set-property propertyName="Authorization" value="#[groovy: 'Basic '+'${ch.user}:${ch.password}'.getBytes().encodeBase64().toString()]" doc:name="Set Basic Auth Props" doc:description="This is a hack to generate the basic auth properties. Jira created." />
+        <https:outbound-endpoint exchange-pattern="request-response" contentType="application/json" address="https://${ch.url}/#[variable:realmid]" doc:name="list-tenants" />
+        <byte-array-to-string-transformer doc:name="Byte Array to String" doc:description="WORKAROUND ONLY.  Must be changed later once connector fixed."/>
+        <set-variable variableName="localdebug" value="${local_debug}" doc:name="localdebug"/>
+        <choice doc:name="Choice">
+            <when expression="#[payload.length() &lt; 5 and localdebug != true]">
+                <logger message="creating tenant #[variable:realmid]" level="INFO" doc:name="creating-tenant"/>
+                <quickbooks:get-current-user config-ref="quickbooks" accessTokenId="#[variable:realmid]" doc:name="get-current-user"/>
+                <data-mapper:transform config-ref="new_mapping_grf" doc:name="qbuser2tenant">
+                    <data-mapper:input-arguments>
+                        <data-mapper:input-argument key="realmid">#[(String) realmid]</data-mapper:input-argument>
+                    </data-mapper:input-arguments>
+                </data-mapper:transform>
+                <enricher source="#[payload]" target="#[variable:creationresult]" doc:name="Message Enricher">
+                    <flow-ref name="tenant-creation-flow" doc:name="tenant-creation"/>
+                </enricher>
+            </when>
+            <otherwise>
+                <logger message="Existing Tenant: #[payload] Or in Dev mode #[localdebug]" level="INFO" doc:name="tenant-exists"/>
+            </otherwise>
+        </choice>
+        <http:response-builder status="302" doc:name="HTTP Response Builder">
+        	<http:location value="https://${fullDomain}/thankyou"/>
+        </http:response-builder>
+    </flow>
+    <flow name="termination-flow" doc:name="termination-flow">
+        <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="${https.port}" path="terminate" connector-ref="https-connector" doc:name="terminate"/>
+        <async doc:name="Async">
+            <quickbooks:disconnect config-ref="quickbooks" accessTokenId="${tenantId}" doc:name="disconnect"/>
+        </async>
+        <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="deleteToken" queryTimeout="-1" connector-ref="jdbcConnector" doc:name="delete-token"/>
+		<set-property propertyName="Authorization" value="#[groovy: 'Basic '+'${ch.user}:${ch.password}'.getBytes().encodeBase64().toString()]" doc:name="Set Basic Auth Props" doc:description="This is a hack to generate the basic auth properties. Jira created." />
+        <https:outbound-endpoint exchange-pattern="request-response" address="https://${ch.url}/${tenantId}" method="DELETE" doc:name="delete-tenant"/>
+        <byte-array-to-string-transformer doc:name="Byte Array to String"/>
+        <logger message="Post termination payload: #[payload]" level="INFO" doc:name="post-termination"/>
+        <remove-property propertyName="Authorization" doc:name="remove-auth"/>
+        <set-payload value="#[string:OK]" doc:name="set-ok"/>
+    </flow>
+    <flow name="intuit-bluedot-flow" doc:name="intuit-bluedot-flow">
+        <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="${https.port}" path="intuitbluedot" connector-ref="https-connector" doc:name="intuit-bluedot"/>
+        <quickbooks:get-blue-dot-information config-ref="quickbooks" accessTokenId="${tenantId}" doc:name="intuit-blue-dot"/>
+        <logger message="Bluedot: #[payload]" level="INFO" doc:name="bluedot"/>
+        <http:response-builder contentType="text/html" doc:name="HTTP Response Builder">
+            <http:header name="Access-Control-Allow-Origin" value="#[string:*]"/>
+            <http:header name="Access-Control-Allow-Credentials" value="#[string:true]"/>
+            <http:header name="Access-Control-Allow-Methods" value="#[string:GET, POST, OPTIONS]"/>
+            <http:header name="Access-Control-Allow-Headers" value="#[string:DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type]"/>
+        </http:response-builder>
+    </flow>
+    <flow name="tenant-creation-flow" doc:name="tenant-creation-flow" processingStrategy="synchronous">
+		<set-property propertyName="Authorization" value="#[groovy: 'Basic '+'${ch.user}:${ch.password}'.getBytes().encodeBase64().toString()]" doc:name="Set Basic Auth Props" doc:description="This is a hack to generate the basic auth properties. Jira created." />
+		<logger message="Tenant Creation: #[payload]" level="INFO" doc:name="tenant-creation"/>
+        <https:outbound-endpoint exchange-pattern="request-response" contentType="application/json" address="https://${ch.url}" doc:name="tenant-creation" />
+        <remove-property propertyName="Authorization" doc:name="remove-auth"/>
+        <byte-array-to-string-transformer doc:name="Byte Array to String"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+        	<http:response-builder status="409" doc:name="HTTP Response Builder"/>
+        </catch-exception-strategy>
+    </flow>
+    <flow name="static-resource-flow" doc:name="static-resource-flow">
+        <https:inbound-endpoint exchange-pattern="request-response" host="localhost" port="${https.port}" path="thankyou" connector-ref="https-connector" doc:name="thankyoupage"/>
+        <http:static-resource-handler resourceBase="${app.home}/docroot" defaultFile="index.html" doc:name="index.html"/>
+    </flow>
+    <flow name="quickbooks-check-flow" doc:name="quickbooks-check-flow">
+        <https:inbound-endpoint exchange-pattern="one-way" host="localhost" port="${https.port}" path="quickbookscheck" connector-ref="https-connector" doc:name="quickbookscheck"/>
+        <quickbooks:get-company-metadata config-ref="quickbooks" accessTokenId="${tenantId}" doc:name="get-company-metadata"/>
+        <mulexml:object-to-xml-transformer doc:name="Object to XML"/>
+        <logger message="Check QB Connection: #[payload]" level="INFO" doc:name="check-quickbooks-connection"/>
+	</flow>    
+</mule>

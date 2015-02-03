@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:quickbooks="http://www.mulesoft.org/schema/mule/quickbooks" xmlns:jbossts="http://www.mulesoft.org/schema/mule/jbossts" xmlns:zuora="http://www.mulesoft.org/schema/mule/zuora" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jbossts http://www.mulesoft.org/schema/mule/jbossts/current/mule-jbossts.xsd
+http://www.mulesoft.org/schema/mule/zuora http://www.mulesoft.org/schema/mule/zuora/1.0/mule-zuora.xsd
+http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/4.0/mule-quickbooks.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd">
+    <data-mapper:config name="z2qbcustomer_grf" transformationGraphPath="z2qbcustomer.grf" doc:name="DataMapper"/>
+    <data-mapper:config name="mapidtype_grf" transformationGraphPath="mapidtype.grf" doc:name="DataMapper"/>
+    <sub-flow name="get-zuora-billto-subflow" doc:name="get-zuora-billto-subflow">
+        <zuora:find config-ref="zuora-config" zquery="select FirstName, LastName, WorkEmail, WorkPhone, Address1, Address2, City, State, PostalCode, Country FROM Contact where Id='#[payload.billToId]'" username="${zuora_user}" password="${zuora_password}" doc:name="find-billto"/>
+        <transformer ref="zobject-to-map" doc:name="zobject-to-map"/>
+        <expression-transformer expression="#[payload.get(0)]" doc:name="get-first-row"/>
+    </sub-flow>
+    <sub-flow name="get-zuora-account-batched-subflow" doc:name="get-zuora-account-batched-subflow">
+        <zuora:find config-ref="zuora-config"  doc:name="find-account" password="${zuora_password}" username="${zuora_user}" zquery="select Id,AccountNumber,PaymentTerm,QuickBooksCustomerId__c,Name,BillToId, Batch from Account where Id='#[payload.accountId]'"/>
+        <transformer ref="zobject-to-map" doc:name="zobject-to-map"/>
+        <expression-transformer expression="#[payload.get(0)]" doc:name="get-first-row"/>
+        <scripting:transformer doc:name="set-batch-filter-flag">
+            <scripting:script engine="Groovy"><![CDATA[def batchfilter = message.getInvocationProperty('batchfilter');
+            def batchmatched = true;
+			if (batchfilter == null || batchfilter == '') {
+				batchmatched = true;
+			} 
+			else if (batchfilter == payload.batch) {
+				batchmatched = true;
+			}
+			else {
+				batchmatched = false;
+			}
+			
+			message.setInvocationProperty('batchmatched', batchmatched);
+			message.setInvocationProperty('paycustomerid', payload.QuickBooksCustomerId__c);
+			
+return payload;]]></scripting:script>
+        </scripting:transformer>
+        <enricher source="#[payload]" target="#[variable:zuorabillto]" doc:name="Message Enricher">
+            <flow-ref name="get-zuora-billto-subflow" doc:name="get-zuora-billto"/>
+        </enricher>
+    </sub-flow>
+    <sub-flow name="get-customer-subflow" doc:name="get-customer-subflow">
+    	<flow-ref name="get-zuora-account-batched-subflow" doc:name="get-zuora-account-batched"/>
+        <set-variable variableName="zuoraaccount" value="#[payload]" doc:name="zuoraaccount"/>
+        <set-variable variableName="paymentterm" value="#[payload.paymentTerm]" doc:name="paymentterm"/>
+        <set-variable variableName="quickbookscustomerid" value="#[map-payload:QuickBooksCustomerId__c?]" doc:name="quickbookscustomerid"/>
+        <choice doc:name="Choice">
+            <when expression="#[flowVars['quickbookscustomerid'] != null]">
+                <enricher source="#[payload]" target="#[variable:validcustomer]" doc:name="Message Enricher">
+                    <vm:outbound-endpoint exchange-pattern="request-response" path="vm.validate.customer" doc:name="validate-customer"/>
+                </enricher>
+	            <choice doc:name="Choice">
+                    <when expression="#[validcustomer == true]">
+                    	<set-payload value="#[payload.QuickBooksCustomerId__c]" doc:name="qbcustomer-id"/>
+                    </when>
+                    <otherwise>
+                    	<flow-ref name="qb-customer-upsert-subflow" doc:name="qb-customer-upsert"/>
+                	</otherwise>
+            	</choice>
+            </when>
+            <otherwise>
+                <flow-ref name="qb-customer-upsert-subflow" doc:name="qb-customer-upsert"/>
+            </otherwise>
+        </choice>
+    </sub-flow>
+    <sub-flow name="qb-customer-upsert-subflow" doc:name="qb-customer-upsert-subflow">
+        <set-variable doc:name="usezid" value="${usezid}" variableName="usezid"/>
+        <set-variable doc:name="customdbaname" value="${customdbaname}" variableName="customdbaname"/>
+        <choice doc:name="Choice">
+            <when expression="#[flowVars['customdbaname'] != null and flowVars['customdbaname'] == true]">
+                <zuora:find config-ref="zuora-config"  doc:name="find-custom-dbaname" password="${zuora_password}" username="${zuora_user}" zquery="select CompanyName__c from Account where Id='#[payload.id]'"/>
+                <transformer ref="zobject-to-map" doc:name="zobject-to-map"/>
+        		<set-payload value="#[payload.get(0).CompanyName__c]" doc:name="use-custom-name"/>
+            </when>
+            <when expression="#[flowVars['usezid'] != null and flowVars['usezid'] == true]">
+                <set-payload value="#[zuoraaccount.accountNumber]" doc:name="use-account-number"/>
+            </when>
+            <otherwise>
+                <set-payload value="#[zuoraaccount.name]" doc:name="set-account-name"/>
+            </otherwise>
+        </choice>
+        <scripting:transformer doc:name="deaccent">
+            <scripting:script engine="Groovy" file="deaccenter.groovy"/>
+        </scripting:transformer>
+        <set-variable variableName="customername" value="#[payload]" doc:name="customername"/>
+        <quickbooks:find-objects config-ref="quickbooks"     doc:name="find-customers" accessTokenId="${tenantId}" type="CUSTOMER" queryFilter="Name :EQUALS: #[payload]"/>
+        <choice doc:name="Choice">
+        	<when expression="#[batchmatched == false]">
+        		<logger message="Wrong batch.  Do nothing" level="INFO" doc:name="wrong-batch"/>
+        		<set-payload value="-1" doc:name="not-matched"/>
+        	</when>
+            <when expression="#[payload.size() &gt; 0 and batchmatched == true]">
+                <set-payload value="#[payload.get(0)]" doc:name="get-first-row"/>
+                <flow-ref name="update-zuora-customer" doc:name="update-zuora-customer"/>
+            </when>
+            <otherwise>
+                <set-payload value="#[variable:zuorabillto]" doc:name="zuorabillto"/>
+                <flow-ref name="create-new-customer-subflow" doc:name="create-new-customer"/>
+            </otherwise>
+        </choice>
+    </sub-flow>
+    <sub-flow name="create-new-customer-subflow" doc:name="create-new-customer-subflow">
+    	<logger message="Creating New Customer #[variable:customername] - #[payload]" level="INFO" doc:name="pre-create-customer"/>
+        <data-mapper:transform config-ref="z2qbcustomer_grf" doc:name="z2qbcustomer">
+            <data-mapper:input-arguments>
+                <data-mapper:input-argument key="customername">#[variable:customername]</data-mapper:input-argument>
+            </data-mapper:input-arguments>
+        </data-mapper:transform>
+    	<logger message="Before QB create customer call #[payload]" level="INFO" doc:name="create-qb-customer"/>
+        <quickbooks:create-customer config-ref="quickbooks" accessTokenId="${tenantId}" doc:name="create-customer">
+            <quickbooks:customer ref="#[payload]"/>
+        </quickbooks:create-customer>
+        <flow-ref name="update-zuora-customer" doc:name="update-zuora-customer"/>
+    </sub-flow>
+    <sub-flow name="update-zuora-customer" doc:name="update-zuora-customer">
+    	<set-payload value="#[payload.id.value]" doc:name="qb-id"/>
+       	<async doc:name="Async">
+        	<processor-chain doc:name="Processor Chain">
+            	<scripting:transformer doc:name="prep-payload">
+                	<scripting:script engine="Groovy"><![CDATA[def zacct = message.getInvocationProperty('zuoraaccount');
+
+def acctmap = [[id:zacct.id,QuickBooksCustomerId__c:payload]];
+
+return acctmap;]]></scripting:script>
+           		</scripting:transformer>
+                <zuora:update config-ref="zuora-config" password="${zuora_password}" username="${zuora_user}" type="Account" doc:name="update-account">
+                	<zuora:zobjects ref="#[payload]"/>
+            	</zuora:update>
+        	</processor-chain>
+    	</async>
+    </sub-flow>
+    <flow name="validate-customer" doc:name="validate-customer">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="vm.validate.customer" doc:name="validate-customer"/>
+        <logger message="Validating customer #[payload]" level="INFO" doc:name="valudating-customer"/>
+        <data-mapper:transform config-ref="mapidtype_grf" doc:name="mapidtype"/>
+        <logger message="Get customer: #[payload]" level="INFO" doc:name="get-customer"/>
+        <quickbooks:get-object config-ref="quickbooks" accessTokenId="${tenantId}" type="CUSTOMER" doc:name="get-customer"/>
+        <set-payload value="#[true]" doc:name="set-true"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <set-payload value="#[false]" doc:name="set-false"/>
+        </catch-exception-strategy>
+    </flow>
+</mule>

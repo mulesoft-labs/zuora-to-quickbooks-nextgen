@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-project xmlns="http://www.mulesoft.com/tooling/project" runtimeId="org.mule.tooling.server.3.5.0.ee">
+    <name>zuora-to-qbo-ng</name>
+    <description></description>
+    <muleExtension name="ObjectStore" qualifier="org.mule.tooling.ui.contribution.objectstore"/>
+    <muleExtension name="Zuora" qualifier="org.mule.tooling.ui.contribution.zuora"/>
+    <muleExtension name="Quickbooks Online" qualifier="org.mule.tooling.ui.contribution.quickbooks"/>
+    <muleExtension name="Cloudhub" qualifier="org.mule.tooling.ui.contribution.cloudhub"/>
+</mule-project>

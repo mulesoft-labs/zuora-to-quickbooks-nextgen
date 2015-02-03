@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:quickbooks="http://www.mulesoft.org/schema/mule/quickbooks" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:zuora="http://www.mulesoft.org/schema/mule/zuora" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/zuora http://www.mulesoft.org/schema/mule/zuora/1.0/mule-zuora.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/4.0/mule-quickbooks.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <data-mapper:config name="mapinvoicelines_grf" transformationGraphPath="mapinvoicelines.grf" doc:name="DataMapper"/>
+    <data-mapper:config name="mapinvoiceheader_grf" transformationGraphPath="mapinvoiceheader.grf" doc:name="DataMapper"/>
+    <flow name="single-invoice-flow" doc:name="single-invoice-flow">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="vm.single.invoice" doc:name="vm.single.invoice"/>
+        <logger message="${tenantId} Single Invoice #[payload]" level="INFO" doc:name="single-invoice"/>
+        <set-variable variableName="zinvoice" value="#[payload]" doc:name="set-invoice"/>
+        <set-variable variableName="batchfilter" value="${batchfilter}" doc:name="batchfilter"/>
+        <flow-ref name="get-customer-subflow" doc:name="get-customer"/>
+        <set-variable variableName="qbcustomerid" value="#[payload]" doc:name="qbcustomerid"/>
+        <expression-filter expression="#[batchmatched == true]" doc:name="batch-filter-check"/>
+        <set-payload value="#[variable:zinvoice]" doc:name="zinvoice"/>
+        <flow-ref name="core-invoice-logic-subflow" doc:name="core-invoice-logic"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <flow-ref name="exception-notification-flow" doc:name="exception-notification"/>
+        </catch-exception-strategy>
+    </flow>
+    <sub-flow name="core-invoice-logic-subflow" doc:name="core-invoice-logic-subflow">
+        <set-variable variableName="invoicedate" value="#[payload.invoiceDate]" doc:name="invoicedate"/>
+        <set-variable variableName="duedate" value="#[payload.dueDate]" doc:name="duedate"/>
+        <set-variable variableName="invoicenumber" value="#[payload.invoiceNumber]" doc:name="invoicenumber"/>
+        <set-variable variableName="invoiceid" value="#[payload.id]" doc:name="invoiceid"/>
+        <enricher doc:name="Message Enricher" source="#[payload]" target="#[variable:invoicelines]">
+            <flow-ref name="process-item-subflow" doc:name="process-item-subflow"/>
+        </enricher>
+        <data-mapper:transform doc:name="mapinvoiceheader" config-ref="mapinvoiceheader_grf">
+            <data-mapper:input-arguments>
+                <data-mapper:input-argument key="qbcustomerid">#[(String) qbcustomerid]</data-mapper:input-argument>
+                <data-mapper:input-argument key="invoicenumber">#[invoicenumber]</data-mapper:input-argument>
+                <data-mapper:input-argument key="paymentterm">#[variable:paymentterm]</data-mapper:input-argument>
+                <data-mapper:input-argument key="invoicedate">#[(String) invoicedate]</data-mapper:input-argument>
+                <data-mapper:input-argument key="duedate">#[(String) duedate]</data-mapper:input-argument>
+            </data-mapper:input-arguments>
+        </data-mapper:transform>
+        <scripting:transformer doc:name="addline">
+            <scripting:script engine="Groovy"><![CDATA[def lines = message.getInvocationProperty('invoicelines');
+			
+			payload.setLine(lines);
+			
+return payload;]]></scripting:script>
+        </scripting:transformer>
+        <quickbooks:create-invoice config-ref="quickbooks" accessTokenId="${tenantId}" doc:name="create-invoice">
+            <quickbooks:invoice ref="#[payload]"/>
+        </quickbooks:create-invoice>
+        <scripting:transformer doc:name="zuora-update">
+            <scripting:script engine="Groovy"><![CDATA[def zid = message.getInvocationProperty('invoiceid');
+			
+			def zmap = [[id:zid, transferredToAccounting:'Yes', QuickBooksInvoiceId__c:payload.id.value]];
+			
+return zmap;]]></scripting:script>
+        </scripting:transformer>
+        <zuora:update config-ref="zuora-config" type="Invoice" password="${zuora_password}" username="${zuora_user}" doc:name="update-invoice">
+            <zuora:zobjects ref="#[payload]"/>
+        </zuora:update>
+    </sub-flow>
+    <sub-flow name="process-item-subflow" doc:name="process-item-subflow">
+    	<set-variable variableName="realmid" value="${tenantId}" doc:name="realmid"/>
+        <zuora:find config-ref="zuora-config" password="${zuora_password}" username="${zuora_user}" zquery="SELECT AccountingCode,ProductDescription,Quantity,UOM,UnitPrice,ChargeAmount,ChargeName,RevRecCode,RevRecStartDate,RatePlanChargeId,SubscriptionId,ChargeDate,SubscriptionNumber,ProductName,ServiceStartDate,ServiceEndDate FROM InvoiceItem WHERE InvoiceId='#[payload.id]'" doc:name="find-line-items"/>
+        <transformer ref="zobject-to-map" doc:name="zobject-to-map"/>
+        <data-mapper:transform doc:name="mapinvoicelines" config-ref="mapinvoicelines_grf">
+            <data-mapper:input-arguments>
+                <data-mapper:input-argument key="realmid">#[(String) realmid]</data-mapper:input-argument>
+            </data-mapper:input-arguments>
+        </data-mapper:transform>
+    </sub-flow>
+    <flow name="item-lookup-flow" doc:name="item-lookup-flow">
+    	<set-variable variableName="realmid" value="#[payload.realmid]" doc:name="realmid"/>
+        <scripting:transformer doc:name="accountingcode">
+            <scripting:script engine="Groovy" file="accountingcode.groovy"/>
+        </scripting:transformer>
+        <quickbooks:find-objects config-ref="quickbooks"     doc:name="find-product" accessTokenId="#[variable:realmid]" type="ITEM" queryFilter="Name :EQUALS: #[variable:qbitemname]"/>
+        <choice doc:name="Choice">
+            <when expression="#[payload.size() &gt; 0]">
+                <logger message="#[variable:realmid] - Found Item" level="DEBUG" doc:name="found item"/>
+            </when>
+            <otherwise>
+                <quickbooks:find-objects config-ref="quickbooks" accessTokenId="#[variable:realmid]" queryFilter="Name :EQUALS: #[variable:zqbitemname]" type="ITEM" doc:name="find-item-backup"/>
+            </otherwise>
+        </choice>
+        <scripting:transformer doc:name="matchitemparent">
+            <scripting:script engine="Groovy" file="matchitemparent.groovy"/>
+        </scripting:transformer>
+    </flow>
+    <flow name="chargename-transform-flow" doc:name="chargename-transform-flow">
+        <scripting:transformer doc:name="transform-chargename">
+            <scripting:script file="transformchargename.groovy" engine="Groovy" />
+        </scripting:transformer>
+    </flow>
+</mule>

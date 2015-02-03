@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="adrianhsieh" created="Fri Aug 23 09:25:31 GMT-03:00 2013" guiVersion="3.4.0.P" id="1377264310568" licenseCode="Unlicensed" licenseType="Unknown" modified="Fri Aug 23 09:25:31 GMT-03:00 2013" modifiedBy="adrianhsieh" name="mappayment_grf" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="0" __referenceCounter="0" __sourcePath="{}/object/alternateId" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="f3b607ed-f411-4047-a16b-9089904f4113" _parent_id="__parent_id" _type="Output" id="0205959f-730c-4db9-8739-89a3a88f01ac">
+<Record fieldDelimiter="|" name="alternateId" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/alternateId/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="1" __sourcePath="{}/object/alternateId/value" containerType="SINGLE" label="value" name="value" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="67" __referenceCounter="0" __sourcePath="{}/object/line" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="f3b607ed-f411-4047-a16b-9089904f4113" _parent_id="__parent_id" _type="Output" id="acb23a10-7737-4128-a492-812dfd606562">
+<Record fieldDelimiter="|" name="line" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="67" __sourcePath="{}/object/line/amount" containerType="SINGLE" label="amount" name="amount" type="decimal"/>
+<Field __index="68" __sourcePath="{}/object/line/desc" containerType="SINGLE" label="desc" name="desc" type="string"/>
+<Field __index="69" __sourcePath="{}/object/line/discountAccountId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain" type="string"/>
+<Field __index="70" __sourcePath="{}/object/line/discountAccountId/value" containerType="SINGLE" label="value" name="value" type="string"/>
+<Field __index="71" __sourcePath="{}/object/line/discountAccountName" containerType="SINGLE" label="discountAccountName" name="discountAccountName" type="string"/>
+<Field __index="72" __sourcePath="{}/object/line/discountAmt" containerType="SINGLE" label="discountAmt" name="discountAmt" type="decimal"/>
+<Field __index="73" __sourcePath="{}/object/line/discountId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_1" type="string"/>
+<Field __index="74" __sourcePath="{}/object/line/discountId/value" containerType="SINGLE" label="value" name="value_1" type="string"/>
+<Field __index="75" __sourcePath="{}/object/line/discountName" containerType="SINGLE" label="discountName" name="discountName" type="string"/>
+<Field __index="76" __sourcePath="{}/object/line/id/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_2" type="string"/>
+<Field __index="77" __sourcePath="{}/object/line/id/value" containerType="SINGLE" label="value" name="value_2" type="string"/>
+<Field __index="78" __sourcePath="{}/object/line/txnId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_3" type="string"/>
+<Field __index="79" __sourcePath="{}/object/line/txnId/value" containerType="SINGLE" label="value" name="value_3" type="string"/>
+<Field __index="80" __sourcePath="{}/object/line/txnNum" containerType="SINGLE" label="txnNum" name="txnNum" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/payment" _dataStructure="OBJECT" _id="__id" _type="Input" id="6eb03428-6656-40fe-bd79-433f201bb4f2">
+<Record fieldDelimiter="|" name="payment" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="4" __sourcePath="{}/payment/amount" containerType="SINGLE" label="amount" name="amount" type="decimal"/>
+<Field __index="2" __sourcePath="{}/payment/comment" containerType="SINGLE" label="comment" name="comment" type="string"/>
+<Field __index="1" __sourcePath="{}/payment/effectiveDate" containerType="SINGLE" label="effectiveDate" name="effectiveDate" type="string"/>
+<Field __index="0" __sourcePath="{}/payment/paymentNumber" containerType="SINGLE" label="paymentNumber" name="paymentNumber" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="f3b607ed-f411-4047-a16b-9089904f4113">
+<Record fieldDelimiter="|" name="Payment" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="2" __sourcePath="{}/object/externalKey/idDomain" containerType="SINGLE" label="idDomain" name="idDomain" type="string"/>
+<Field __index="3" __sourcePath="{}/object/externalKey/value" containerType="SINGLE" label="value" name="value" type="string"/>
+<Field __index="4" __sourcePath="{}/object/header/ARAccountId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_1" type="string"/>
+<Field __index="5" __sourcePath="{}/object/header/ARAccountId/value" containerType="SINGLE" label="value" name="value_1" type="string"/>
+<Field __index="6" __sourcePath="{}/object/header/ARAccountName" containerType="SINGLE" label="ARAccountName" name="ARAccountName" type="string"/>
+<Field __index="7" __sourcePath="{}/object/header/currency" containerType="SINGLE" label="currency" name="currency" type="string"/>
+<Field __index="8" __sourcePath="{}/object/header/customerId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_2" type="string"/>
+<Field __index="9" __sourcePath="{}/object/header/customerId/value" containerType="SINGLE" label="value" name="value_2" type="string"/>
+<Field __index="10" __sourcePath="{}/object/header/customerName" containerType="SINGLE" label="customerName" name="customerName" type="string"/>
+<Field __index="11" __sourcePath="{}/object/header/depositToAccountId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_3" type="string"/>
+<Field __index="12" __sourcePath="{}/object/header/depositToAccountId/value" containerType="SINGLE" label="value" name="value_3" type="string"/>
+<Field __index="13" __sourcePath="{}/object/header/depositToAccountName" containerType="SINGLE" label="depositToAccountName" name="depositToAccountName" type="string"/>
+<Field __index="14" __sourcePath="{}/object/header/detail/cash/desc" containerType="SINGLE" label="desc" name="desc" type="string"/>
+<Field __index="15" __sourcePath="{}/object/header/detail/check/acctNum" containerType="SINGLE" label="acctNum" name="acctNum" type="string"/>
+<Field __index="16" __sourcePath="{}/object/header/detail/check/bankName" containerType="SINGLE" label="bankName" name="bankName" type="string"/>
+<Field __index="17" __sourcePath="{}/object/header/detail/check/checkNum" containerType="SINGLE" label="checkNum" name="checkNum" type="string"/>
+<Field __index="18" __sourcePath="{}/object/header/detail/check/nameOnAcct" containerType="SINGLE" label="nameOnAcct" name="nameOnAcct" type="string"/>
+<Field __index="19" __sourcePath="{}/object/header/detail/check/routingNum" containerType="SINGLE" label="routingNum" name="routingNum" type="string"/>
+<Field __index="20" __sourcePath="{}/object/header/detail/check/status" containerType="SINGLE" label="status" name="status" type="string"/>
+<Field __index="21" __sourcePath="{}/object/header/detail/creditCard/creditChargeInfo/CCTxnMode" containerType="SINGLE" label="CCTxnMode" name="CCTxnMode" type="string"/>
+<Field __index="22" __sourcePath="{}/object/header/detail/creditCard/creditChargeInfo/CCTxnType" containerType="SINGLE" label="CCTxnType" name="CCTxnType" type="string"/>
+<Field __index="23" __sourcePath="{}/object/header/detail/creditCard/creditChargeInfo/billAddrStreet" containerType="SINGLE" label="billAddrStreet" name="billAddrStreet" type="string"/>
+<Field __index="24" __sourcePath="{}/object/header/detail/creditCard/creditChargeInfo/ccExpirMn" containerType="SINGLE" label="ccExpirMn" name="ccExpirMn" type="integer"/>
+<Field __index="25" __sourcePath="{}/object/header/detail/creditCard/creditChargeInfo/ccExpirYr" containerType="SINGLE" label="ccExpirYr" name="ccExpirYr" type="integer"/>
+<Field __index="26" __sourcePath="{}/object/header/detail/creditCard/creditChargeInfo/commercialCardCode" containerType="SINGLE" label="commercialCardCode" name="commercialCardCode" type="string"/>
+<Field __index="27" __sourcePath="{}/object/header/detail/creditCard/creditChargeInfo/cvv" containerType="SINGLE" label="cvv" name="cvv" type="string"/>
+<Field __index="28" __sourcePath="{}/object/header/detail/creditCard/creditChargeInfo/nameOnAcct" containerType="SINGLE" label="nameOnAcct" name="nameOnAcct_1" type="string"/>
+<Field __index="29" __sourcePath="{}/object/header/detail/creditCard/creditChargeInfo/number" containerType="SINGLE" label="number" name="number" type="string"/>
+<Field __index="30" __sourcePath="{}/object/header/detail/creditCard/creditChargeInfo/token" containerType="SINGLE" label="token" name="token" type="string"/>
+<Field __index="31" __sourcePath="{}/object/header/detail/creditCard/creditChargeInfo/type" containerType="SINGLE" label="type" name="type" type="string"/>
+<Field __index="32" __sourcePath="{}/object/header/detail/creditCard/creditChargeInfo/zipCode" containerType="SINGLE" label="zipCode" name="zipCode" type="string"/>
+<Field __index="33" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/CCTransId" containerType="SINGLE" label="CCTransId" name="CCTransId" type="string"/>
+<Field __index="34" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/authCode" containerType="SINGLE" label="authCode" name="authCode" type="string"/>
+<Field __index="35" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/avsStreet" containerType="SINGLE" label="avsStreet" name="avsStreet" type="string"/>
+<Field __index="36" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/avsZip" containerType="SINGLE" label="avsZip" name="avsZip" type="string"/>
+<Field __index="37" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/cardSecurityCodeMatch" containerType="SINGLE" label="cardSecurityCodeMatch" name="cardSecurityCodeMatch" type="string"/>
+<Field __index="38" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/clientTransID" containerType="SINGLE" label="clientTransID" name="clientTransID" type="string"/>
+<Field __index="39" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/merchantAcctNum" containerType="SINGLE" label="merchantAcctNum" name="merchantAcctNum" type="string"/>
+<Field __index="40" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/paymentGroupingCode" containerType="SINGLE" label="paymentGroupingCode" name="paymentGroupingCode" type="integer"/>
+<Field __index="41" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/reconBatchId" containerType="SINGLE" label="reconBatchId" name="reconBatchId" type="string"/>
+<Field __index="42" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/resultCode" containerType="SINGLE" label="resultCode" name="resultCode" type="integer"/>
+<Field __index="43" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/resultMsg" containerType="SINGLE" label="resultMsg" name="resultMsg" type="string"/>
+<Field __index="44" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/securityCode" containerType="SINGLE" label="securityCode" name="securityCode" type="string"/>
+<Field __index="45" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/status" containerType="SINGLE" label="status" name="status_1" type="string"/>
+<Field __index="46" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/txnAuthorizationStamp" containerType="SINGLE" label="txnAuthorizationStamp" name="txnAuthorizationStamp" type="integer"/>
+<Field __index="47" __sourcePath="{}/object/header/detail/creditCard/creditChargeResponse/txnAuthorizationTime" containerType="SINGLE" label="txnAuthorizationTime" name="txnAuthorizationTime" type="date"/>
+<Field __index="48" __sourcePath="{}/object/header/docNumber" containerType="SINGLE" label="docNumber" name="docNumber" type="string"/>
+<Field __index="49" __sourcePath="{}/object/header/jobId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_4" type="string"/>
+<Field __index="50" __sourcePath="{}/object/header/jobId/value" containerType="SINGLE" label="value" name="value_4" type="string"/>
+<Field __index="51" __sourcePath="{}/object/header/jobName" containerType="SINGLE" label="jobName" name="jobName" type="string"/>
+<Field __index="52" __sourcePath="{}/object/header/msg" containerType="SINGLE" label="msg" name="msg" type="string"/>
+<Field __index="53" __sourcePath="{}/object/header/note" containerType="SINGLE" label="note" name="note" type="string"/>
+<Field __index="54" __sourcePath="{}/object/header/paymentMethodId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_5" type="string"/>
+<Field __index="55" __sourcePath="{}/object/header/paymentMethodId/value" containerType="SINGLE" label="value" name="value_5" type="string"/>
+<Field __index="56" __sourcePath="{}/object/header/paymentMethodName" containerType="SINGLE" label="paymentMethodName" name="paymentMethodName" type="string"/>
+<Field __index="57" __sourcePath="{}/object/header/processPayment" containerType="SINGLE" label="processPayment" name="processPayment" type="boolean"/>
+<Field __index="58" __sourcePath="{}/object/header/remitToId/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_6" type="string"/>
+<Field __index="59" __sourcePath="{}/object/header/remitToId/value" containerType="SINGLE" label="value" name="value_6" type="string"/>
+<Field __index="60" __sourcePath="{}/object/header/remitToName" containerType="SINGLE" label="remitToName" name="remitToName" type="string"/>
+<Field __index="61" __sourcePath="{}/object/header/status" containerType="SINGLE" label="status" name="status_2" type="string"/>
+<Field __index="62" __sourcePath="{}/object/header/totalAmt" containerType="SINGLE" label="totalAmt" name="totalAmt" type="decimal"/>
+<Field __index="63" __sourcePath="{}/object/header/txnDate" containerType="SINGLE" label="txnDate" name="txnDate" type="date"/>
+<Field __index="64" __sourcePath="{}/object/header/unappliedAmt" containerType="SINGLE" label="unappliedAmt" name="unappliedAmt" type="decimal"/>
+<Field __index="65" __sourcePath="{}/object/id/idDomain" containerType="SINGLE" label="idDomain" name="idDomain_7" type="string"/>
+<Field __index="66" __sourcePath="{}/object/id/value" containerType="SINGLE" label="value" name="value_7" type="string"/>
+<Field __index="81" __sourcePath="{}/object/metaData/createTime" containerType="SINGLE" label="createTime" name="createTime" type="date"/>
+<Field __index="82" __sourcePath="{}/object/metaData/createdBy" containerType="SINGLE" label="createdBy" name="createdBy" type="string"/>
+<Field __index="83" __sourcePath="{}/object/metaData/createdById" containerType="SINGLE" label="createdById" name="createdById" type="string"/>
+<Field __index="84" __sourcePath="{}/object/metaData/lastModifiedBy" containerType="SINGLE" label="lastModifiedBy" name="lastModifiedBy" type="string"/>
+<Field __index="85" __sourcePath="{}/object/metaData/lastModifiedById" containerType="SINGLE" label="lastModifiedById" name="lastModifiedById" type="string"/>
+<Field __index="86" __sourcePath="{}/object/metaData/lastUpdatedTime" containerType="SINGLE" label="lastUpdatedTime" name="lastUpdatedTime" type="date"/>
+<Field __index="87" __sourcePath="{}/object/syncToken" containerType="SINGLE" label="syncToken" name="syncToken" type="string"/>
+<Field __index="88" __sourcePath="{}/object/synchronized" containerType="SINGLE" label="synchronized" name="synchronized" type="boolean"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+<Entry dictval.__javaType="java.lang.String" id="DictionaryEntry2" input="true" name="paycustomerid" output="true" type="string"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiName="Map&lt;k,v&gt; READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="amount" trim="true" xpath="amount"/>
+  <Mapping cloverField="comment" trim="true" xpath="comment"/>
+  <Mapping cloverField="effectiveDate" trim="true" xpath="effectiveDate"/>
+  <Mapping cloverField="paymentNumber" trim="true" xpath="paymentNumber"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[MAP]]></attr>
+</Node>
+<Node enabled="enabled" fileURL="dict:outputPayload" guiName="Pojo WRITER" guiX="900" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <externalKey>
+    <idDomain>$0.idDomain</idDomain>
+    <value>$0.value</value>
+  </externalKey>
+  <header>
+    <ARAccountId>
+      <idDomain>$0.idDomain_1</idDomain>
+      <value>$0.value_1</value>
+    </ARAccountId>
+    <ARAccountName>$0.ARAccountName</ARAccountName>
+    <currency>$0.currency</currency>
+    <customerId>
+      <idDomain>$0.idDomain_2</idDomain>
+      <value>$0.value_2</value>
+    </customerId>
+    <customerName>$0.customerName</customerName>
+    <depositToAccountId>
+      <idDomain>$0.idDomain_3</idDomain>
+      <value>$0.value_3</value>
+    </depositToAccountId>
+    <depositToAccountName>$0.depositToAccountName</depositToAccountName>
+    <detail>
+      <cash>
+        <desc>$0.desc</desc>
+      </cash>
+      <check>
+        <acctNum>$0.acctNum</acctNum>
+        <bankName>$0.bankName</bankName>
+        <checkNum>$0.checkNum</checkNum>
+        <nameOnAcct>$0.nameOnAcct</nameOnAcct>
+        <routingNum>$0.routingNum</routingNum>
+        <status>$0.status</status>
+      </check>
+      <creditCard>
+        <creditChargeInfo>
+          <CCTxnMode>$0.CCTxnMode</CCTxnMode>
+          <CCTxnType>$0.CCTxnType</CCTxnType>
+          <billAddrStreet>$0.billAddrStreet</billAddrStreet>
+          <ccExpirMn>$0.ccExpirMn</ccExpirMn>
+          <ccExpirYr>$0.ccExpirYr</ccExpirYr>
+          <commercialCardCode>$0.commercialCardCode</commercialCardCode>
+          <cvv>$0.cvv</cvv>
+          <nameOnAcct>$0.nameOnAcct_1</nameOnAcct>
+          <number>$0.number</number>
+          <token>$0.token</token>
+          <type>$0.type</type>
+          <zipCode>$0.zipCode</zipCode>
+        </creditChargeInfo>
+        <creditChargeResponse>
+          <CCTransId>$0.CCTransId</CCTransId>
+          <authCode>$0.authCode</authCode>
+          <avsStreet>$0.avsStreet</avsStreet>
+          <avsZip>$0.avsZip</avsZip>
+          <cardSecurityCodeMatch>$0.cardSecurityCodeMatch</cardSecurityCodeMatch>
+          <clientTransID>$0.clientTransID</clientTransID>
+          <merchantAcctNum>$0.merchantAcctNum</merchantAcctNum>
+          <paymentGroupingCode>$0.paymentGroupingCode</paymentGroupingCode>
+          <reconBatchId>$0.reconBatchId</reconBatchId>
+          <resultCode>$0.resultCode</resultCode>
+          <resultMsg>$0.resultMsg</resultMsg>
+          <securityCode>$0.securityCode</securityCode>
+          <status>$0.status_1</status>
+          <txnAuthorizationStamp>$0.txnAuthorizationStamp</txnAuthorizationStamp>
+          <txnAuthorizationTime>$0.txnAuthorizationTime</txnAuthorizationTime>
+        </creditChargeResponse>
+      </creditCard>
+    </detail>
+    <docNumber>$0.docNumber</docNumber>
+    <jobId>
+      <idDomain>$0.idDomain_4</idDomain>
+      <value>$0.value_4</value>
+    </jobId>
+    <jobName>$0.jobName</jobName>
+    <msg>$0.msg</msg>
+    <note>$0.note</note>
+    <paymentMethodId>
+      <idDomain>$0.idDomain_5</idDomain>
+      <value>$0.value_5</value>
+    </paymentMethodId>
+    <paymentMethodName>$0.paymentMethodName</paymentMethodName>
+    <processPayment>$0.processPayment</processPayment>
+    <remitToId>
+      <idDomain>$0.idDomain_6</idDomain>
+      <value>$0.value_6</value>
+    </remitToId>
+    <remitToName>$0.remitToName</remitToName>
+    <status>$0.status_2</status>
+    <totalAmt>$0.totalAmt</totalAmt>
+    <txnDate>$0.txnDate</txnDate>
+    <unappliedAmt>$0.unappliedAmt</unappliedAmt>
+  </header>
+  <id>
+    <idDomain>$0.idDomain_7</idDomain>
+    <value>$0.value_7</value>
+  </id>
+  <metaData>
+    <createTime>$0.createTime</createTime>
+    <createdBy>$0.createdBy</createdBy>
+    <createdById>$0.createdById</createdById>
+    <lastModifiedBy>$0.lastModifiedBy</lastModifiedBy>
+    <lastModifiedById>$0.lastModifiedById</lastModifiedById>
+    <lastUpdatedTime>$0.lastUpdatedTime</lastUpdatedTime>
+  </metaData>
+  <syncToken>$0.syncToken</syncToken>
+  <synchronized>$0.synchronized</synchronized>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<schema-object>
+  <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.Payment"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CreditCardPayment">
+    <typed-object-ref name="creditChargeInfo" type-ref="org.mule.modules.quickbooks.online.schema.CreditChargeInfo"/>
+    <typed-object-ref name="creditChargeResponse" type-ref="org.mule.modules.quickbooks.online.schema.CreditChargeResponse"/>
+  </typed-object>
+  <typed-object type="java.lang.Boolean"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.ModificationMetaData">
+    <typed-object-ref name="createTime" type-ref="java.util.Date"/>
+    <typed-object-ref name="createdBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="createdById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedBy" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastModifiedById" type-ref="java.lang.String"/>
+    <typed-object-ref name="lastUpdatedTime" type-ref="java.util.Date"/>
+  </typed-object>
+  <typed-object type="java.lang.Integer"/>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CashPayment">
+    <typed-object-ref name="desc" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.util.Date"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.Payment">
+    <schema-collection name="alternateId" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.NameValue"/>
+    </schema-collection>
+    <typed-object-ref name="externalKey" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="header" type-ref="org.mule.modules.quickbooks.online.schema.PaymentHeader"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <schema-collection name="line" type="java.util.List">
+      <typed-object-ref type-ref="org.mule.modules.quickbooks.online.schema.PaymentLine"/>
+    </schema-collection>
+    <typed-object-ref name="metaData" type-ref="org.mule.modules.quickbooks.online.schema.ModificationMetaData"/>
+    <typed-object-ref name="syncToken" type-ref="java.lang.String"/>
+    <typed-object-ref name="synchronized" type-ref="java.lang.Boolean"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CurrencyCode"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CCTxnTypeEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CCTxnModeEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.PaymentHeader">
+    <typed-object-ref name="ARAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="ARAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="currency" type-ref="org.mule.modules.quickbooks.online.schema.CurrencyCode"/>
+    <typed-object-ref name="customerId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="customerName" type-ref="java.lang.String"/>
+    <typed-object-ref name="depositToAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="depositToAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="detail" type-ref="org.mule.modules.quickbooks.online.schema.PaymentDetail"/>
+    <typed-object-ref name="docNumber" type-ref="java.lang.String"/>
+    <typed-object-ref name="jobId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="jobName" type-ref="java.lang.String"/>
+    <typed-object-ref name="msg" type-ref="java.lang.String"/>
+    <typed-object-ref name="note" type-ref="java.lang.String"/>
+    <typed-object-ref name="paymentMethodId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="paymentMethodName" type-ref="java.lang.String"/>
+    <typed-object-ref name="processPayment" type-ref="java.lang.Boolean"/>
+    <typed-object-ref name="remitToId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="remitToName" type-ref="java.lang.String"/>
+    <typed-object-ref name="status" type-ref="java.lang.String"/>
+    <typed-object-ref name="totalAmt" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="txnDate" type-ref="java.util.Date"/>
+    <typed-object-ref name="unappliedAmt" type-ref="java.math.BigDecimal"/>
+  </typed-object>
+  <typed-object type="java.math.BigInteger"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CreditCardTypeEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.PaymentDetail">
+    <typed-object-ref name="cash" type-ref="org.mule.modules.quickbooks.online.schema.CashPayment"/>
+    <typed-object-ref name="check" type-ref="org.mule.modules.quickbooks.online.schema.CheckPayment"/>
+    <typed-object-ref name="creditCard" type-ref="org.mule.modules.quickbooks.online.schema.CreditCardPayment"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.NameValue">
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CreditChargeInfo">
+    <typed-object-ref name="CCTxnMode" type-ref="org.mule.modules.quickbooks.online.schema.CCTxnModeEnum"/>
+    <typed-object-ref name="CCTxnType" type-ref="org.mule.modules.quickbooks.online.schema.CCTxnTypeEnum"/>
+    <typed-object-ref name="billAddrStreet" type-ref="java.lang.String"/>
+    <typed-object-ref name="ccExpirMn" type-ref="java.lang.Integer"/>
+    <typed-object-ref name="ccExpirYr" type-ref="java.lang.Integer"/>
+    <typed-object-ref name="commercialCardCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="cvv" type-ref="java.lang.String"/>
+    <typed-object-ref name="nameOnAcct" type-ref="java.lang.String"/>
+    <typed-object-ref name="number" type-ref="java.lang.String"/>
+    <typed-object-ref name="token" type-ref="java.lang.String"/>
+    <typed-object-ref name="type" type-ref="org.mule.modules.quickbooks.online.schema.CreditCardTypeEnum"/>
+    <typed-object-ref name="zipCode" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.math.BigDecimal"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CCSecurityCodeMatchEnum"/>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CheckPayment">
+    <typed-object-ref name="acctNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="bankName" type-ref="java.lang.String"/>
+    <typed-object-ref name="checkNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="nameOnAcct" type-ref="java.lang.String"/>
+    <typed-object-ref name="routingNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="status" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.CreditChargeResponse">
+    <typed-object-ref name="CCTransId" type-ref="java.lang.String"/>
+    <typed-object-ref name="authCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="avsStreet" type-ref="java.lang.String"/>
+    <typed-object-ref name="avsZip" type-ref="java.lang.String"/>
+    <typed-object-ref name="cardSecurityCodeMatch" type-ref="org.mule.modules.quickbooks.online.schema.CCSecurityCodeMatchEnum"/>
+    <typed-object-ref name="clientTransID" type-ref="java.lang.String"/>
+    <typed-object-ref name="merchantAcctNum" type-ref="java.lang.String"/>
+    <typed-object-ref name="paymentGroupingCode" type-ref="java.math.BigInteger"/>
+    <typed-object-ref name="reconBatchId" type-ref="java.lang.String"/>
+    <typed-object-ref name="resultCode" type-ref="java.math.BigInteger"/>
+    <typed-object-ref name="resultMsg" type-ref="java.lang.String"/>
+    <typed-object-ref name="securityCode" type-ref="java.lang.String"/>
+    <typed-object-ref name="status" type-ref="java.lang.String"/>
+    <typed-object-ref name="txnAuthorizationStamp" type-ref="java.math.BigInteger"/>
+    <typed-object-ref name="txnAuthorizationTime" type-ref="java.util.Date"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.PaymentLine">
+    <typed-object-ref name="amount" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="desc" type-ref="java.lang.String"/>
+    <typed-object-ref name="discountAccountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="discountAccountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="discountAmt" type-ref="java.math.BigDecimal"/>
+    <typed-object-ref name="discountId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="discountName" type-ref="java.lang.String"/>
+    <typed-object-ref name="id" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="txnId" type-ref="org.mule.modules.quickbooks.online.schema.IdType"/>
+    <typed-object-ref name="txnNum" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="org.mule.modules.quickbooks.online.schema.IdType">
+    <typed-object-ref name="idDomain" type-ref="org.mule.modules.quickbooks.online.schema.IdDomainEnum"/>
+    <typed-object-ref name="value" type-ref="java.lang.String"/>
+  </typed-object>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'payment' -&gt; 'object'" guiX="460" guiY="20" id="FOREACH_PAYMENT_OBJECT" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.value_2 = dictionary.paycustomerid;
+		$out.0.docNumber = $in.0.paymentNumber;
+	$out.0.txnDate = str2date(substring($in.0.effectiveDate,0,10),'yyyy-MM-dd');
+	$out.0.totalAmt = $in.0.amount;
+		$out.0.note = $in.0.comment;
+//START -> DO NOT REMOVE
+$out.0.__id = $in.0.__id;
+//END -> DO NOT REMOVE
+	return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="6eb03428-6656-40fe-bd79-433f201bb4f2" outPort="Port 0 (out)" toNode="FOREACH_PAYMENT_OBJECT:0"/>
+<Edge debugMode="true" fromNode="FOREACH_PAYMENT_OBJECT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="f3b607ed-f411-4047-a16b-9089904f4113" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+</Phase>
+</Graph>

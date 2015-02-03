@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore" xmlns:cloudhub="http://www.mulesoft.org/schema/mule/cloudhub" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:quickbooks="http://www.mulesoft.org/schema/mule/quickbooks" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/4.0/mule-quickbooks.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/cloudhub http://www.mulesoft.org/schema/mule/cloudhub/1.0/mule-cloudhub.xsd
+http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/1.0/mule-objectstore.xsd">
+    <cloudhub:config name="Cloudhub" url="${ch.env}" username="${ch.user}" password="${ch.password}" doc:name="Cloudhub"/>
+    <flow name="windsock-flow" doc:name="windsock-flow">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="${http.port}" path="windsock" responseTimeout="600000" doc:name="windsock"/>
+        <logger message="inside-windsock for TENANT: ${tenantId}" level="INFO" doc:name="inside-windsock"/>
+        <logger level="INFO" doc:name="windsock-request"/>
+        <scripting:transformer doc:name="json-response">
+            <scripting:script engine="Groovy"><![CDATA[def outmap=[status:200, message:'Tenant OK'];
+
+return outmap;]]></scripting:script>
+        </scripting:transformer>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <logger message="Windsock Tenant ${tenantId} post JSON payload  #[payload]" level="INFO" doc:name="DEBUG"/>
+    </flow>
+    <flow name="poll-expiring-token-flow" doc:name="poll-expiring-token-flow">
+        <poll frequency="${checktoken}" doc:name="Poll">
+            <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="expiringToken" queryTimeout="-1" connector-ref="jdbcConnector" doc:name="expiringTokens"/>
+        </poll>
+        <logger message="Checking token expriation for ${tenantId}" level="INFO" doc:name="Checking token expiration"/>
+        <foreach doc:name="For Each">
+            <quickbooks:reconnect config-ref="quickbooks" accessTokenId="#[map-payload:realmid]" doc:name="token-refresh"/>
+            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="tokenRefreshed" queryTimeout="-1" connector-ref="jdbcConnector" doc:name="tokenRefreshed"/>
+        </foreach>
+    </flow>
+    <flow name="exception-notification-flow" doc:name="exception-notification-flow" processingStrategy="synchronous">
+    	<objectstore:store config-ref="sync-control-objectsore" doc:name="set-insync-false" key="${tenantId}-in.sync" value-ref="#[false]" overwrite="true"/>
+        <set-variable variableName="zuora_user" value="${zuora_user}" doc:name="zuora_user"/>
+        <set-variable variableName="zuora_password" value="${zuora_password}" doc:name="zuora_password"/>
+        <set-variable variableName="realmid" value="${tenantId}" doc:name="realmid"/>
+        <scripting:transformer doc:name="notification-payload">
+            <scripting:script engine="Groovy"><![CDATA[def outmap=[
+            realmid:message.getInvocationProperty('realmid'),
+            zuora_user:message.getInvocationProperty('zuora_user'),
+            zuora_password:message.getInvocationProperty('zuora_password'),
+            error:exception.cause.message,
+            payload:payload
+            ];
+
+return outmap;]]></scripting:script>
+        </scripting:transformer>
+        <logger message="#[payload]" level="ERROR" doc:name="log-error"/>
+        <cloudhub:create-notification config-ref="Cloudhub" message="#[payload]" priority="ERROR" doc:name="create-notification"/>
+    </flow>
+</mule>

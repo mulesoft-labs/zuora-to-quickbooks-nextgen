@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:quickbooks="http://www.mulesoft.org/schema/mule/quickbooks" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:zuora="http://www.mulesoft.org/schema/mule/zuora" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/zuora http://www.mulesoft.org/schema/mule/zuora/1.0/mule-zuora.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.mulesoft.org/schema/mule/quickbooks http://www.mulesoft.org/schema/mule/quickbooks/4.0/mule-quickbooks.xsd">
+    <data-mapper:config name="paymentitem_grf" transformationGraphPath="paymentitem.grf" doc:name="DataMapper"/>
+    <data-mapper:config name="mappayment_grf" transformationGraphPath="mappayment.grf" doc:name="DataMapper"/>
+    <flow name="single-payment-flow" doc:name="single-payment-flow">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="vm.single.payment" doc:name="vm.single.payment"/>
+        <set-variable variableName="zpayment" value="#[payload]" doc:name="set-payment"/>
+        <set-variable variableName="paymentid" value="#[payload.id]" doc:name="paymentid"/>
+        <set-variable variableName="batchfilter" value="${batchfilter}" doc:name="batchfilter"/>
+        <flow-ref name="get-zuora-account-batched-subflow" doc:name="get-zuora-account-batched"/>
+        <expression-filter expression="#[batchmatched == true]" doc:name="batch-filter-check"/>
+        <set-payload value="#[variable:zpayment]" doc:name="zpayment"/>
+        <enricher source="#[payload]" target="#[variable:paymentlines]" doc:name="Message Enricher">
+            <processor-chain doc:name="Processor Chain">
+	            <flow-ref name="payment-line-subflow" doc:name="payment-line"/>
+		        <scripting:transformer doc:name="listtypecheck">
+		            <scripting:script engine="Groovy" file="listtypecheck.groovy"/>
+		        </scripting:transformer>
+		    </processor-chain>
+        </enricher>
+        <expression-filter expression="#[paymentlines.size() > 0]" doc:name="paymentlinesize"/>
+        <set-variable variableName="memopaydate" value="${memopaydate}" doc:name="memopaydate"/>
+        <scripting:transformer doc:name="transformmemopaydate">
+            <scripting:script engine="Groovy" file="transformpaymentmemo.groovy"/>
+        </scripting:transformer>
+        <data-mapper:transform doc:name="mappayment" config-ref="mappayment_grf">
+            <data-mapper:input-arguments>
+                <data-mapper:input-argument key="paycustomerid">#[(String) paycustomerid]</data-mapper:input-argument>
+            </data-mapper:input-arguments>
+        </data-mapper:transform>
+        <scripting:transformer doc:name="payment-lines">
+            <scripting:script engine="Groovy"><![CDATA[def lines = message.getInvocationProperty('paymentlines');
+			
+			payload.setLine(lines);
+			
+return payload;]]></scripting:script>
+        </scripting:transformer>
+        <quickbooks:create-payment config-ref="quickbooks"     doc:name="create-payment" accessTokenId="${tenantId}">
+            <quickbooks:payment ref="#[payload]"/>
+        </quickbooks:create-payment>
+        <scripting:transformer doc:name="zuora-update">
+            <scripting:script engine="Groovy"><![CDATA[def zid = message.getInvocationProperty('paymentid');
+			
+			def zmap = [[id:zid, transferredToAccounting:'Yes', QuickBooksPaymentId__c:payload.id.value]];
+			
+return zmap;]]></scripting:script>
+        </scripting:transformer>
+        <zuora:update config-ref="zuora-config" type="Payment" password="${zuora_password}" username="${zuora_user}" doc:name="update-payment">
+            <zuora:zobjects ref="#[payload]"/>
+        </zuora:update>     
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <flow-ref name="exception-notification-flow" doc:name="exception-notification"/>
+        </catch-exception-strategy>
+    </flow>
+    <sub-flow name="payment-line-subflow" doc:name="payment-line-subflow">
+        <zuora:find config-ref="zuora-config" password="${zuora_password}" username="${zuora_user}" zquery="select InvoiceId, Amount from InvoicePayment where PaymentId='#[payload.id]'" doc:name="find-invoice-payment"/>
+        <transformer ref="zobject-to-map" doc:name="zobject-to-map"/>
+        <collection-splitter doc:name="Collection Splitter"/>
+            <processor-chain doc:name="Processor Chain">
+        		<set-variable variableName="zinvoicepayment" value="#[payload]" doc:name="set-invoicepayment"/>
+        		<set-variable variableName="payamount" value="#[payload.amount]" doc:name="payamount"/>
+                <zuora:find config-ref="zuora-config" zquery="select InvoiceNumber, PaymentAmount, QuickBooksInvoiceId__c from Invoice where Id='#[payload.invoiceId]'" username="${zuora_user}" password="${zuora_password}" doc:name="find-payment-lines"/>
+        		<transformer ref="zobject-to-map" doc:name="zobject-to-map"/>
+                <data-mapper:transform doc:name="paymentitem" config-ref="paymentitem_grf">
+                <data-mapper:input-arguments>
+                    <data-mapper:input-argument key="payamount">#[variable:payamount]</data-mapper:input-argument>
+                </data-mapper:input-arguments>
+            </data-mapper:transform>
+            </processor-chain>
+    </sub-flow>
+</mule>
